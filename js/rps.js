@@ -18,6 +18,7 @@ const matchResultEl = document.getElementById("matchResult");
 const totalWinsEl = document.getElementById("totalWins");
 const totalLossesEl = document.getElementById("totalLosses");
 const totalDrawsEl = document.getElementById("totalDraws");
+const confettiContainer = document.getElementById("confetti-container");
 
 // ==================== Game Data ====================
 const choices = ["rock", "paper", "scissors"];  // Array of valid choices
@@ -62,6 +63,7 @@ function initMatch() {
   matchResultEl.classList.add("hidden");
   matchResultEl.className = "match-result hidden";
   nextRoundBtn.classList.add("hidden");
+  confettiContainer.innerHTML = "";
   
   updateLifetimeStats();
   enableWeapons();
@@ -202,6 +204,7 @@ function endMatch(winner) {
       matchResultEl.classList.add("victory");
       totalWins++;
       localStorage.setItem("rpsWins", totalWins);
+      createConfetti();
       break;
     case "computer":
       matchResultEl.textContent = "🗡️ DEFEAT! Sensei prevails...";
@@ -231,6 +234,28 @@ function disableWeapons() {
  */
 function enableWeapons() {
   weaponBtns.forEach(btn => btn.disabled = false);
+}
+
+/**
+ * Creates confetti animation for victory celebration
+ */
+function createConfetti() {
+  const colors = ["#d4af37", "#8b0000", "#22c55e", "#fbbf24", "#dc2626", "#fef2f2"];
+  
+  for (let i = 0; i < 60; i++) {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left = Math.random() * 100 + "%";
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.animationDelay = Math.random() * 0.5 + "s";
+    confetti.style.animationDuration = (Math.random() * 1 + 2) + "s";
+    confettiContainer.appendChild(confetti);
+  }
+  
+  // Clean up confetti after animation
+  setTimeout(() => {
+    confettiContainer.innerHTML = "";
+  }, 3000);
 }
 
 // ==================== Event Listeners ====================

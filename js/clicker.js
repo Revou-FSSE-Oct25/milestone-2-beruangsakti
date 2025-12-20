@@ -11,6 +11,7 @@ const timerText = document.getElementById("timer");
 const scoreText = document.getElementById("score");
 const highScoreText = document.getElementById("highScore");
 const finalMessage = document.getElementById("finalMessage");
+const confettiContainer = document.getElementById("confetti-container");
 
 // ==================== Game State ====================
 let score;
@@ -34,6 +35,8 @@ function initGame() {
   timerText.classList.remove("warning");
   highScoreText.textContent = highScore;
   finalMessage.textContent = "";
+  finalMessage.classList.remove("new-record");
+  confettiContainer.innerHTML = "";
 
   clickBtn.disabled = false;
   clearInterval(timerId);
@@ -71,6 +74,11 @@ function handleClick() {
   if (timeLeft > 0) {
     score++;
     scoreText.textContent = score;
+
+    // Score bump animation
+    scoreText.classList.remove("bump");
+    void scoreText.offsetWidth;
+    scoreText.classList.add("bump");
 
     // Pop animation - remove and re-add class to trigger
     clickBtn.classList.remove("pop");
@@ -130,7 +138,31 @@ function endGame() {
     localStorage.setItem("clickerHighScore", highScore);
     highScoreText.textContent = highScore;
     finalMessage.textContent = "🎉 NEW HIGH SCORE! " + getScoreMessage(score);
+    finalMessage.classList.add("new-record");
+    createConfetti();
   }
+}
+
+/**
+ * Creates confetti animation for high score celebration
+ */
+function createConfetti() {
+  const colors = ["#38bdf8", "#f43f5e", "#fbbf24", "#22c55e", "#a78bfa", "#fb7185"];
+  
+  for (let i = 0; i < 50; i++) {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left = Math.random() * 100 + "%";
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.animationDelay = Math.random() * 0.5 + "s";
+    confetti.style.animationDuration = (Math.random() * 1 + 2) + "s";
+    confettiContainer.appendChild(confetti);
+  }
+  
+  // Clean up confetti after animation
+  setTimeout(() => {
+    confettiContainer.innerHTML = "";
+  }, 3000);
 }
 
 // ==================== Event Listeners ====================
