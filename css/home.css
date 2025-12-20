@@ -78,14 +78,15 @@ body::before {
 .feature {
   background-color: rgba(56, 189, 248, 0.1);
   border: 1px solid rgba(56, 189, 248, 0.3);
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-xl);
   font-size: 0.9rem;
   color: var(--color-accent);
 }
 
 /* ===== SECTION TITLE ===== */
-.section-title {
+.section-title,
+.games h2 {
   text-align: center;
   font-size: 2rem;
   margin-bottom: var(--spacing-lg);
@@ -95,7 +96,7 @@ body::before {
 /* ===== GAME CARDS ===== */
 .game-card {
   position: relative;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
   overflow: hidden;
 }
 
@@ -117,6 +118,8 @@ body::before {
 .card-icon {
   font-size: 3rem;
   margin-bottom: var(--spacing-sm);
+  display: inline-block;
+  transition: transform var(--transition-bounce);
 }
 
 .game-card h3 {
@@ -142,8 +145,8 @@ body::before {
 .card-btn {
   width: 100%;
   text-align: center;
-  padding: 12px var(--spacing-md);
-  transition: all 0.2s ease;
+  padding: var(--spacing-sm) var(--spacing-md);
+  transition: all var(--transition-fast);
 }
 
 .card-btn:hover {
@@ -154,86 +157,86 @@ body::before {
 
 /* Detective Theme - Number Guess */
 .detective-theme::before {
-  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  background: linear-gradient(90deg, var(--color-detective), var(--color-detective-dark));
 }
 
 .detective-theme:hover {
-  border-color: #fbbf24;
+  border-color: var(--color-detective);
   box-shadow: 
     0 20px 40px rgba(0, 0, 0, 0.3),
     0 0 30px rgba(251, 191, 36, 0.1);
 }
 
 .detective-theme .card-btn {
-  background: linear-gradient(145deg, #ca8a04, #a16207);
+  background: linear-gradient(145deg, var(--color-detective-dark), var(--color-detective-darker));
 }
 
 .detective-theme .card-btn:hover {
-  background: linear-gradient(145deg, #eab308, #ca8a04);
+  background: linear-gradient(145deg, var(--color-detective), var(--color-detective-dark));
 }
 
 /* Samurai Theme - RPS */
 .samurai-theme::before {
-  background: linear-gradient(90deg, #8b0000, #dc2626);
+  background: linear-gradient(90deg, var(--color-samurai-dark), var(--color-samurai));
 }
 
 .samurai-theme:hover {
-  border-color: #8b0000;
+  border-color: var(--color-samurai-dark);
   box-shadow: 
     0 20px 40px rgba(0, 0, 0, 0.3),
     0 0 30px rgba(139, 0, 0, 0.2);
 }
 
 .samurai-theme .card-btn {
-  background: linear-gradient(145deg, #8b0000, #6b0000);
-  border: 1px solid #d4af37;
-  color: #d4af37;
+  background: linear-gradient(145deg, var(--color-samurai-dark), var(--color-samurai-darker));
+  border: 1px solid var(--color-samurai-accent);
+  color: var(--color-samurai-accent);
 }
 
 .samurai-theme .card-btn:hover {
-  background: linear-gradient(145deg, #a00000, #8b0000);
+  background: linear-gradient(145deg, var(--color-samurai-light), var(--color-samurai-dark));
 }
 
 /* Arcade Theme - Clicker */
 .arcade-theme::before {
-  background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+  background: linear-gradient(90deg, var(--color-arcade), var(--color-accent-hover));
 }
 
 .arcade-theme:hover {
-  border-color: #38bdf8;
+  border-color: var(--color-arcade);
   box-shadow: 
     0 20px 40px rgba(0, 0, 0, 0.3),
     0 0 30px rgba(56, 189, 248, 0.2);
 }
 
 .arcade-theme .card-btn {
-  background: linear-gradient(145deg, #f43f5e, #be123c);
-  border: 2px solid #fda4af;
+  background: linear-gradient(145deg, var(--color-arcade-btn), var(--color-arcade-btn-dark));
+  border: 2px solid var(--color-arcade-btn-border);
 }
 
 .arcade-theme .card-btn:hover {
-  background: linear-gradient(145deg, #fb7185, #e11d48);
+  background: linear-gradient(145deg, var(--color-arcade-btn-light), var(--color-arcade-btn-hover));
 }
 
 /* Go Theme - Gomoku */
 .go-theme::before {
-  background: linear-gradient(90deg, #b8860b, #d4af37);
+  background: linear-gradient(90deg, var(--color-go-dark), var(--color-go));
 }
 
 .go-theme:hover {
-  border-color: #d4af37;
+  border-color: var(--color-go);
   box-shadow: 
     0 20px 40px rgba(0, 0, 0, 0.3),
     0 0 30px rgba(212, 175, 55, 0.2);
 }
 
 .go-theme .card-btn {
-  background: linear-gradient(145deg, #8b4513, #654321);
-  border: 2px solid #d4af37;
+  background: linear-gradient(145deg, var(--color-go-wood), var(--color-go-wood-dark));
+  border: 2px solid var(--color-go);
 }
 
 .go-theme .card-btn:hover {
-  background: linear-gradient(145deg, #a0522d, #8b4513);
+  background: linear-gradient(145deg, var(--color-go-wood-light), var(--color-go-wood));
 }
 
 /* ===== FOOTER ===== */
@@ -248,7 +251,7 @@ footer {
   color: var(--color-text-subtle);
   margin-bottom: var(--spacing-md);
   opacity: 0.7;
-  transition: opacity 0.2s ease;
+  transition: opacity var(--transition-fast);
 }
 
 .game-card:hover .card-keys {
@@ -258,10 +261,10 @@ footer {
 /* ===== CARD BADGES ===== */
 .card-badge {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 4px 10px;
-  border-radius: 12px;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-lg);
   font-size: 0.7rem;
   font-weight: bold;
   text-transform: uppercase;
@@ -269,7 +272,7 @@ footer {
 }
 
 .ai-badge {
-  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  background: linear-gradient(135deg, var(--color-ai-primary), var(--color-ai-secondary));
   color: white;
   box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
   animation: pulse-badge 2s ease infinite;
@@ -281,11 +284,6 @@ footer {
 }
 
 /* ===== ICON HOVER ANIMATIONS ===== */
-.card-icon {
-  display: inline-block;
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
 .game-card:hover .card-icon {
   transform: scale(1.15);
 }
@@ -300,10 +298,6 @@ footer {
 
 .arcade-theme:hover .card-icon {
   transform: scale(1.2) translateY(-3px);
-}
-
-.go-theme:hover .card-icon {
-  transform: scale(1.15);
 }
 
 /* ===== STATS SUMMARY SECTION ===== */
@@ -322,10 +316,10 @@ footer {
 .stat-card {
   background: rgba(15, 23, 42, 0.6);
   border: 1px solid var(--color-border-light);
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   padding: var(--spacing-md);
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .stat-card:hover {
@@ -345,7 +339,7 @@ footer {
   font-weight: bold;
   color: var(--color-accent);
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: var(--spacing-xs);
 }
 
 .stat-name {
@@ -423,7 +417,7 @@ footer {
   }
   
   .feature {
-    padding: 6px 12px;
+    padding: var(--spacing-xs) var(--spacing-sm);
     font-size: 0.8rem;
   }
   
@@ -441,6 +435,6 @@ footer {
   
   .card-stats {
     flex-direction: column;
-    gap: 5px;
+    gap: var(--spacing-xs);
   }
 }

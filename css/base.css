@@ -19,22 +19,61 @@
   --color-error: #dc2626;
   --color-warning: #fbbf24;
   
+  /* Theme Colors - Detective */
+  --color-detective: #fbbf24;
+  --color-detective-dark: #ca8a04;
+  --color-detective-darker: #a16207;
+  
+  /* Theme Colors - Samurai */
+  --color-samurai: #dc2626;
+  --color-samurai-dark: #8b0000;
+  --color-samurai-darker: #6b0000;
+  --color-samurai-light: #a00000;
+  --color-samurai-accent: #d4af37;
+  
+  /* Theme Colors - Arcade */
+  --color-arcade: #38bdf8;
+  --color-arcade-btn: #f43f5e;
+  --color-arcade-btn-dark: #be123c;
+  --color-arcade-btn-light: #fb7185;
+  --color-arcade-btn-hover: #e11d48;
+  --color-arcade-btn-border: #fda4af;
+  
+  /* Theme Colors - Go/Gomoku */
+  --color-go: #d4af37;
+  --color-go-dark: #b8860b;
+  --color-go-wood: #8b4513;
+  --color-go-wood-light: #a0522d;
+  --color-go-wood-dark: #654321;
+  
+  /* Theme Colors - AI Badge */
+  --color-ai-primary: #8b5cf6;
+  --color-ai-secondary: #6366f1;
+  
   /* Border Colors */
   --color-border: #334155;
   --color-border-light: #1e293b;
   
   /* Spacing */
+  --spacing-xs: 5px;
   --spacing-sm: 10px;
   --spacing-md: 20px;
   --spacing-lg: 30px;
+  --spacing-xl: 40px;
   
   /* Border Radius */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
+  --radius-xl: 20px;
   
   /* Font */
   --font-mono: 'Courier New', monospace;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ===== RESET & BASE ===== */
@@ -72,33 +111,12 @@ footer {
 
 footer {
   text-align: center;
-  margin-top: 40px;
+  margin-top: var(--spacing-xl);
   font-size: 0.9rem;
   opacity: 0.8;
 }
 
-/* ===== HERO ===== */
-.hero {
-  text-align: center;
-  padding: 60px var(--spacing-lg);
-}
-
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: var(--spacing-sm);
-}
-
-.hero p {
-  font-size: 1.2rem;
-  color: var(--color-text-muted);
-}
-
 /* ===== GAMES LIST ===== */
-.games h2 {
-  margin-bottom: var(--spacing-md);
-  font-size: 2rem;
-}
-
 .game-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(200px, 280px));
@@ -138,20 +156,11 @@ footer {
   border: 1px solid var(--color-border-light);
 }
 
-.game-card h3 {
-  margin-bottom: var(--spacing-sm);
-}
-
-.game-card p {
-  margin-bottom: 16px;
-  color: var(--color-text-muted);
-}
-
 /* ===== BUTTONS ===== */
 button,
 .btn {
   display: inline-block;
-  padding: var(--spacing-sm) 18px;
+  padding: var(--spacing-sm) var(--spacing-md);
   background-color: var(--color-accent);
   color: var(--color-bg-secondary);
   border: none;
@@ -172,26 +181,26 @@ button:disabled {
 
 /* ===== GAME PAGES COMMON ===== */
 main h1 {
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-sm);
 }
 
 main p {
-  margin-bottom: 16px;
+  margin-bottom: var(--spacing-md);
 }
 
 /* ===== STATS PANEL (SHARED) ===== */
 .stats-panel {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin-bottom: 25px;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
 }
 
 .stat-box {
   background-color: var(--color-bg-secondary);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: 12px var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
   min-width: 80px;
 }
 
@@ -200,7 +209,7 @@ main p {
   font-size: 0.7rem;
   color: var(--color-text-subtle);
   letter-spacing: 2px;
-  margin-bottom: 4px;
+  margin-bottom: var(--spacing-xs);
 }
 
 .stat-value {
@@ -241,30 +250,14 @@ main p {
     padding: var(--spacing-md);
   }
   
-  .hero h1 {
-    font-size: 2rem;
-  }
-  
-  .hero p {
-    font-size: 1rem;
-  }
-  
-  .games h2 {
-    font-size: 1.5rem;
-  }
-  
-  .game-list {
-    grid-template-columns: 1fr;
-  }
-  
   .stats-panel {
     flex-wrap: wrap;
-    gap: 10px;
+    gap: var(--spacing-sm);
   }
   
   .stat-box {
     min-width: 70px;
-    padding: 10px 12px;
+    padding: var(--spacing-sm) var(--spacing-sm);
   }
   
   .stat-value {

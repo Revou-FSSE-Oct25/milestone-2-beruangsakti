@@ -119,37 +119,7 @@
     <p>© 2025 Happy? | Built with HTML, CSS, and TypeScript</p>
   </footer>
 
-  <script>
-    // Load stats from localStorage
-    function loadStats() {
-      // Clicker high score
-      const clickerHigh = localStorage.getItem('clickerHigh') || '0';
-      document.getElementById('clickerHighScore').textContent = clickerHigh;
-      
-      // Number guess games played
-      const guessGames = localStorage.getItem('guessTotal') || '0';
-      document.getElementById('guessGamesPlayed').textContent = guessGames;
-      
-      // RPS win rate
-      const rpsWins = parseInt(localStorage.getItem('rpsWins') || '0');
-      const rpsLosses = parseInt(localStorage.getItem('rpsLosses') || '0');
-      const rpsTotal = rpsWins + rpsLosses;
-      if (rpsTotal > 0) {
-        const winRate = Math.round((rpsWins / rpsTotal) * 100);
-        document.getElementById('rpsWinRate').textContent = winRate + '%';
-      } else {
-        document.getElementById('rpsWinRate').textContent = '-';
-      }
-      
-      // Gomoku wins (black + white)
-      const gomokuBlack = parseInt(localStorage.getItem('gomokuBlackWins') || '0');
-      const gomokuWhite = parseInt(localStorage.getItem('gomokuWhiteWins') || '0');
-      const totalWins = gomokuBlack + gomokuWhite;
-      document.getElementById('gomokuWins').textContent = totalWins > 0 ? totalWins : '-';
-    }
-    
-    loadStats();
-  </script>
+  <script type="module" src="dist/js/home.js"></script>
 
 </body>
 </html>
