@@ -216,5 +216,17 @@ guessInput.addEventListener("keydown", function (e) {
 
 restartBtn.addEventListener("click", initGame);
 
+/**
+ * Keyboard support - R to restart game
+ */
+document.addEventListener("keydown", function(e) {
+  if (e.key === "r" || e.key === "R") {
+    // Only restart if not typing in input
+    if (document.activeElement !== guessInput) {
+      initGame();
+    }
+  }
+});
+
 // ==================== Initialize ====================
 initGame();

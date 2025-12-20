@@ -245,5 +245,41 @@ weaponBtns.forEach(btn => {
 nextRoundBtn.addEventListener("click", nextRound);
 newMatchBtn.addEventListener("click", initMatch);
 
+/**
+ * Keyboard support:
+ * 1/R = Rock, 2/P = Paper, 3/S = Scissors
+ * Enter/Space = Next round, N = New match
+ */
+document.addEventListener("keydown", function(e) {
+  // Weapon selection (only when round is active)
+  if (!roundOver && !matchOver) {
+    switch (e.key.toLowerCase()) {
+      case "1":
+      case "r":
+        playRound("rock");
+        break;
+      case "2":
+      case "p":
+        playRound("paper");
+        break;
+      case "3":
+      case "s":
+        playRound("scissors");
+        break;
+    }
+  }
+  
+  // Next round with Enter or Space
+  if ((e.key === "Enter" || e.key === " ") && roundOver && !matchOver) {
+    e.preventDefault();
+    nextRound();
+  }
+  
+  // New match with N key
+  if (e.key === "n" || e.key === "N") {
+    initMatch();
+  }
+});
+
 // ==================== Initialize ====================
 initMatch();

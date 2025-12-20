@@ -137,5 +137,23 @@ function endGame() {
 clickBtn.addEventListener("click", handleClick);
 restartBtn.addEventListener("click", initGame);
 
+/**
+ * Keyboard support - Space or Enter to click, R to restart
+ */
+document.addEventListener("keydown", function(e) {
+  // Space or Enter to click (prevent page scroll with Space)
+  if (e.key === " " || e.key === "Enter") {
+    e.preventDefault();
+    if (!clickBtn.disabled) {
+      handleClick();
+    }
+  }
+  
+  // R to restart game
+  if (e.key === "r" || e.key === "R") {
+    initGame();
+  }
+});
+
 // ==================== Initialize ====================
 initGame();
