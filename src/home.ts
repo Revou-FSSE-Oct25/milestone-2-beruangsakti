@@ -7,6 +7,7 @@ import { safeGetItem } from "./utils.js";
 
 // ==================== DOM Elements ====================
 const clickerHighScoreEl = document.getElementById("clickerHighScore") as HTMLSpanElement;
+const guessBestScoreEl = document.getElementById("guessBestScore") as HTMLSpanElement;
 const guessGamesPlayedEl = document.getElementById("guessGamesPlayed") as HTMLSpanElement;
 const rpsWinRateEl = document.getElementById("rpsWinRate") as HTMLSpanElement;
 const gomokuWinsEl = document.getElementById("gomokuWins") as HTMLSpanElement;
@@ -18,6 +19,7 @@ const gomokuWinsEl = document.getElementById("gomokuWins") as HTMLSpanElement;
  */
 function loadStats(): void {
   loadClickerStats();
+  loadGuessBestScore();
   loadGuessStats();
   loadRpsStats();
   loadGomokuStats();
@@ -27,8 +29,13 @@ function loadStats(): void {
  * Loads clicker game high score
  */
 function loadClickerStats(): void {
-  const highScore = safeGetItem("clickerHigh", "0");
+  const highScore = safeGetItem("clickerHighScore", "0");
   clickerHighScoreEl.textContent = highScore !== "0" ? highScore : "-";
+}
+
+function loadGuessBestScore(): void {
+  const bestScore = safeGetItem("guessGameBest", null);
+  guessBestScoreEl.textContent = bestScore ? bestScore : "-";
 }
 
 /**
