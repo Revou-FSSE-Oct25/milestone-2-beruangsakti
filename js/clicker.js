@@ -1,3 +1,10 @@
+/**
+ * Clicker Game - Arcade Style
+ * Click as many times as you can in 10 seconds!
+ * Features: High score tracking with localStorage
+ */
+
+// ==================== DOM Elements ====================
 const clickBtn = document.getElementById("clickBtn");
 const restartBtn = document.getElementById("restartBtn");
 const timerText = document.getElementById("timer");
@@ -5,12 +12,18 @@ const scoreText = document.getElementById("score");
 const highScoreText = document.getElementById("highScore");
 const finalMessage = document.getElementById("finalMessage");
 
+// ==================== Game State ====================
 let score;
 let timeLeft;
 let timerId;
 let gameRunning;
 let highScore = localStorage.getItem("clickerHighScore") || 0;
 
+// ==================== Game Functions ====================
+
+/**
+ * Initializes the game state and resets the UI
+ */
 function initGame() {
   score = 0;
   timeLeft = 10;
@@ -26,6 +39,9 @@ function initGame() {
   clearInterval(timerId);
 }
 
+/**
+ * Starts the countdown timer
+ */
 function startTimer() {
   timerId = setInterval(() => {
     timeLeft--;
@@ -42,7 +58,11 @@ function startTimer() {
   }, 1000);
 }
 
+/**
+ * Handles each click on the button
+ */
 function handleClick() {
+  // Start game on first click
   if (!gameRunning) {
     gameRunning = true;
     startTimer();
@@ -52,22 +72,48 @@ function handleClick() {
     score++;
     scoreText.textContent = score;
 
-    // Pop animation
+    // Pop animation - remove and re-add class to trigger
     clickBtn.classList.remove("pop");
     void clickBtn.offsetWidth; // Trigger reflow to restart animation
     clickBtn.classList.add("pop");
   }
 }
 
+/**
+ * Returns a message based on the player's score using switch statement
+ * @param {number} score - The player's final score
+ * @returns {string} A message corresponding to score tier
+ */
 function getScoreMessage(score) {
-  if (score >= 50) return "🔥 Legendary! You're insane!";
-  if (score >= 40) return "🏆 Amazing! Pro clicker!";
-  if (score >= 30) return "👏 Great job!";
-  if (score >= 20) return "👍 Not bad!";
-  if (score >= 10) return "🙂 Keep practicing!";
-  return "😅 You can do better!";
+  // Determine score tier
+  let tier;
+  if (score >= 50) tier = "legendary";
+  else if (score >= 40) tier = "amazing";
+  else if (score >= 30) tier = "great";
+  else if (score >= 20) tier = "good";
+  else if (score >= 10) tier = "okay";
+  else tier = "low";
+
+  // Return message based on tier using switch
+  switch (tier) {
+    case "legendary":
+      return "🔥 Legendary! You're insane!";
+    case "amazing":
+      return "🏆 Amazing! Pro clicker!";
+    case "great":
+      return "👏 Great job!";
+    case "good":
+      return "👍 Not bad!";
+    case "okay":
+      return "🙂 Keep practicing!";
+    default:
+      return "😅 You can do better!";
+  }
 }
 
+/**
+ * Ends the game and checks for high score
+ */
 function endGame() {
   clearInterval(timerId);
   clickBtn.disabled = true;
@@ -78,6 +124,7 @@ function endGame() {
   // Show final score message
   finalMessage.textContent = getScoreMessage(score);
   
+  // Check and update high score in localStorage
   if (score > highScore) {
     highScore = score;
     localStorage.setItem("clickerHighScore", highScore);
@@ -86,7 +133,9 @@ function endGame() {
   }
 }
 
+// ==================== Event Listeners ====================
 clickBtn.addEventListener("click", handleClick);
 restartBtn.addEventListener("click", initGame);
 
+// ==================== Initialize ====================
 initGame();

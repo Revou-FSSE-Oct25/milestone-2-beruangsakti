@@ -1,3 +1,10 @@
+/**
+ * Rock Paper Scissors - Samurai Dojo Theme
+ * Best of 5 rounds against the Sensei!
+ * Features: Round tracking, lifetime stats with localStorage
+ */
+
+// ==================== DOM Elements ====================
 const weaponBtns = document.querySelectorAll(".weapon-btn");
 const playerChoiceEl = document.getElementById("playerChoice");
 const computerChoiceEl = document.getElementById("computerChoice");
@@ -12,9 +19,11 @@ const totalWinsEl = document.getElementById("totalWins");
 const totalLossesEl = document.getElementById("totalLosses");
 const totalDrawsEl = document.getElementById("totalDraws");
 
-const choices = ["rock", "paper", "scissors"];
-const emojis = { rock: "🪨", paper: "📜", scissors: "✂️" };
+// ==================== Game Data ====================
+const choices = ["rock", "paper", "scissors"];  // Array of valid choices
+const emojis = { rock: "🪨", paper: "📜", scissors: "✂️" };  // Object mapping choices to emojis
 
+// ==================== Game State ====================
 let playerScore = 0;
 let computerScore = 0;
 let currentRound = 1;
@@ -28,6 +37,11 @@ let totalWins = Number(localStorage.getItem("rpsWins")) || 0;
 let totalLosses = Number(localStorage.getItem("rpsLosses")) || 0;
 let totalDraws = Number(localStorage.getItem("rpsDraws")) || 0;
 
+// ==================== Game Functions ====================
+
+/**
+ * Initializes a new match and resets all scores
+ */
 function initMatch() {
   playerScore = 0;
   computerScore = 0;
@@ -35,6 +49,7 @@ function initMatch() {
   roundOver = false;
   matchOver = false;
 
+  // Reset UI elements
   playerScoreEl.textContent = "0";
   computerScoreEl.textContent = "0";
   currentRoundEl.textContent = "1";
@@ -52,18 +67,33 @@ function initMatch() {
   enableWeapons();
 }
 
+/**
+ * Updates the lifetime stats display from localStorage
+ */
 function updateLifetimeStats() {
   totalWinsEl.textContent = totalWins;
   totalLossesEl.textContent = totalLosses;
   totalDrawsEl.textContent = totalDraws;
 }
 
+/**
+ * Randomly selects computer's choice from the choices array
+ * @returns {string} "rock", "paper", or "scissors"
+ */
 function getComputerChoice() {
   return choices[Math.floor(Math.random() * choices.length)];
 }
 
+/**
+ * Determines the winner using logical operators
+ * @param {string} player - Player's choice
+ * @param {string} computer - Computer's choice
+ * @returns {string} "player", "computer", or "draw"
+ */
 function determineWinner(player, computer) {
   if (player === computer) return "draw";
+  
+  // Win conditions using logical AND (&&) and OR (||)
   if (
     (player === "rock" && computer === "scissors") ||
     (player === "paper" && computer === "rock") ||
@@ -74,21 +104,25 @@ function determineWinner(player, computer) {
   return "computer";
 }
 
+/**
+ * Plays a single round of RPS
+ * @param {string} playerChoice - The player's weapon choice
+ */
 function playRound(playerChoice) {
   if (roundOver || matchOver) return;
 
   const computerChoice = getComputerChoice();
   const winner = determineWinner(playerChoice, computerChoice);
 
-  // Display choices with animation
+  // Display choices with emojis from object
   playerChoiceEl.textContent = emojis[playerChoice];
   computerChoiceEl.textContent = emojis[computerChoice];
   
-  // Add animation classes
+  // Add reveal animation classes
   playerChoiceEl.classList.add("reveal");
   computerChoiceEl.classList.add("reveal");
 
-  // Update scores and result
+  // Update scores and result based on winner
   if (winner === "player") {
     playerScore++;
     playerScoreEl.textContent = playerScore;
@@ -131,11 +165,15 @@ function playRound(playerChoice) {
   }
 }
 
+/**
+ * Advances to the next round and resets round state
+ */
 function nextRound() {
   currentRound++;
   currentRoundEl.textContent = currentRound;
   roundOver = false;
 
+  // Reset choice displays
   playerChoiceEl.textContent = "?";
   computerChoiceEl.textContent = "?";
   playerChoiceEl.className = "choice-display";
@@ -147,48 +185,65 @@ function nextRound() {
   enableWeapons();
 }
 
+/**
+ * Ends the match and displays final result
+ * Updates lifetime stats in localStorage
+ * @param {string} winner - "player", "computer", or "draw"
+ */
 function endMatch(winner) {
   matchOver = true;
   nextRoundBtn.classList.add("hidden");
   matchResultEl.classList.remove("hidden");
 
-  if (winner === "player") {
-    matchResultEl.textContent = "🏆 VICTORY! You are the champion!";
-    matchResultEl.classList.add("victory");
-    totalWins++;
-    localStorage.setItem("rpsWins", totalWins);
-  } else if (winner === "computer") {
-    matchResultEl.textContent = "🗡️ DEFEAT! Sensei prevails...";
-    matchResultEl.classList.add("defeat");
-    totalLosses++;
-    localStorage.setItem("rpsLosses", totalLosses);
-  } else {
-    matchResultEl.textContent = "⚖️ STALEMATE! Honor is shared.";
-    matchResultEl.classList.add("stalemate");
-    totalDraws++;
-    localStorage.setItem("rpsDraws", totalDraws);
+  // Handle match result with switch statement
+  switch (winner) {
+    case "player":
+      matchResultEl.textContent = "🏆 VICTORY! You are the champion!";
+      matchResultEl.classList.add("victory");
+      totalWins++;
+      localStorage.setItem("rpsWins", totalWins);
+      break;
+    case "computer":
+      matchResultEl.textContent = "🗡️ DEFEAT! Sensei prevails...";
+      matchResultEl.classList.add("defeat");
+      totalLosses++;
+      localStorage.setItem("rpsLosses", totalLosses);
+      break;
+    default:
+      matchResultEl.textContent = "⚖️ STALEMATE! Honor is shared.";
+      matchResultEl.classList.add("stalemate");
+      totalDraws++;
+      localStorage.setItem("rpsDraws", totalDraws);
   }
 
   updateLifetimeStats();
 }
 
+/**
+ * Disables all weapon buttons
+ */
 function disableWeapons() {
   weaponBtns.forEach(btn => btn.disabled = true);
 }
 
+/**
+ * Enables all weapon buttons
+ */
 function enableWeapons() {
   weaponBtns.forEach(btn => btn.disabled = false);
 }
 
-// Event Listeners
+// ==================== Event Listeners ====================
+
+// Add click listener to each weapon button using forEach
 weaponBtns.forEach(btn => {
   btn.addEventListener("click", function() {
-    playRound(this.dataset.choice);
+    playRound(this.dataset.choice);  // Get choice from data attribute
   });
 });
 
 nextRoundBtn.addEventListener("click", nextRound);
 newMatchBtn.addEventListener("click", initMatch);
 
-// Initialize
+// ==================== Initialize ====================
 initMatch();
