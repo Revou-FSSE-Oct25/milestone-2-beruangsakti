@@ -8,7 +8,6 @@ import { safeGetItem } from "./utils.js";
 // ==================== DOM Elements ====================
 const clickerHighScoreEl = document.getElementById("clickerHighScore") as HTMLSpanElement;
 const guessBestScoreEl = document.getElementById("guessBestScore") as HTMLSpanElement;
-const guessGamesPlayedEl = document.getElementById("guessGamesPlayed") as HTMLSpanElement;
 const rpsWinRateEl = document.getElementById("rpsWinRate") as HTMLSpanElement;
 const gomokuWinsEl = document.getElementById("gomokuWins") as HTMLSpanElement;
 
@@ -20,7 +19,6 @@ const gomokuWinsEl = document.getElementById("gomokuWins") as HTMLSpanElement;
 function loadStats(): void {
   loadClickerStats();
   loadGuessBestScore();
-  loadGuessStats();
   loadRpsStats();
   loadGomokuStats();
 }
@@ -38,13 +36,6 @@ function loadGuessBestScore(): void {
   guessBestScoreEl.textContent = bestScore ? bestScore : "-";
 }
 
-/**
- * Loads number guessing games played
- */
-function loadGuessStats(): void {
-  const gamesPlayed = safeGetItem("guessTotal", "0");
-  guessGamesPlayedEl.textContent = gamesPlayed !== "0" ? gamesPlayed : "-";
-}
 
 /**
  * Loads RPS win rate percentage
