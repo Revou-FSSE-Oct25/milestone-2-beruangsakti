@@ -34,9 +34,40 @@ let roundOver = false;
 let matchOver = false;
 
 // Lifetime stats from localStorage
-let totalWins = Number(localStorage.getItem("rpsWins")) || 0;
-let totalLosses = Number(localStorage.getItem("rpsLosses")) || 0;
-let totalDraws = Number(localStorage.getItem("rpsDraws")) || 0;
+let totalWins = Number(safeGetItem("rpsWins", 0));
+let totalLosses = Number(safeGetItem("rpsLosses", 0));
+let totalDraws = Number(safeGetItem("rpsDraws", 0));
+
+// ==================== Storage Helpers ====================
+
+/**
+ * Safely retrieves an item from localStorage
+ * @param {string} key - The storage key
+ * @param {*} defaultValue - Default value if retrieval fails
+ * @returns {*} The stored value or default
+ */
+function safeGetItem(key, defaultValue) {
+  try {
+    const value = localStorage.getItem(key);
+    return value !== null ? value : defaultValue;
+  } catch (e) {
+    console.warn("localStorage not available:", e.message);
+    return defaultValue;
+  }
+}
+
+/**
+ * Safely stores an item in localStorage
+ * @param {string} key - The storage key
+ * @param {*} value - The value to store
+ */
+function safeSetItem(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch (e) {
+    console.warn("localStorage not available:", e.message);
+  }
+}
 
 // ==================== Game Functions ====================
 
@@ -203,20 +234,20 @@ function endMatch(winner) {
       matchResultEl.textContent = "🏆 VICTORY! You are the champion!";
       matchResultEl.classList.add("victory");
       totalWins++;
-      localStorage.setItem("rpsWins", totalWins);
+      safeSetItem("rpsWins", totalWins);
       createConfetti();
       break;
     case "computer":
       matchResultEl.textContent = "🗡️ DEFEAT! Sensei prevails...";
       matchResultEl.classList.add("defeat");
       totalLosses++;
-      localStorage.setItem("rpsLosses", totalLosses);
+      safeSetItem("rpsLosses", totalLosses);
       break;
     default:
       matchResultEl.textContent = "⚖️ STALEMATE! Honor is shared.";
       matchResultEl.classList.add("stalemate");
       totalDraws++;
-      localStorage.setItem("rpsDraws", totalDraws);
+      safeSetItem("rpsDraws", totalDraws);
   }
 
   updateLifetimeStats();

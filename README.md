@@ -6,7 +6,7 @@ A collection of simple, fun JavaScript games you can play instantly in your brow
 
 ## 🎯 Live Demo
 
-[Play Happy? Games](https://revou-fsse-feb24.github.io/milestone-2-beruangsakti/)
+[Play Happy? Games](https://revou-fsse-oct25.github.io/milestone-2-beruangsakti/)
 
 ## 🕹️ Games
 
