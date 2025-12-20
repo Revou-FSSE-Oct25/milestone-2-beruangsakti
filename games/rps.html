@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rock Paper Scissors | RevoFun</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <main>
+    <h1>Rock Paper Scissors</h1>
+
+    <p>
+      Choose <strong>Rock</strong>, <strong>Paper</strong>, or <strong>Scissors</strong>.<br>
+      The computer will choose randomly.
+    </p>
+
+    <div class="game-controls">
+      <button class="choice-btn" data-choice="rock">Rock</button>
+      <button class="choice-btn" data-choice="paper">Paper</button>
+      <button class="choice-btn" data-choice="scissors">Scissors</button>
+    </div>
+
+    <p id="playerChoice">Your choice: -</p>
+    <p id="computerChoice">Computer choice: -</p>
+    <p id="result">Make your move!</p>
+
+    <button id="restartBtn">Restart Game</button>
+
+    <br /><br />
+
+    <a href="../index.html">← Back to Home</a>
+  </main>
+
+  <script src="../js/rps.js"></script>
+</body>
+</html>
