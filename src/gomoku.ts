@@ -11,7 +11,7 @@ import { safeGetItem, safeSetItem, createConfetti } from "./utils.js";
 type Player = "black" | "white";
 type CellState = Player | null;
 type GameMode = "pvp" | "pve";
-type Difficulty = "easy" | "medium" | "hard";
+type Difficulty = "easy" | "medium" | "hard" | "impossible";
 
 interface Move {
   row: number;
@@ -57,6 +57,7 @@ const difficultySelector = document.getElementById("difficultySelector") as HTML
 const easyBtn = document.getElementById("easyBtn") as HTMLButtonElement;
 const mediumBtn = document.getElementById("mediumBtn") as HTMLButtonElement;
 const hardBtn = document.getElementById("hardBtn") as HTMLButtonElement;
+const impossibleBtn = document.getElementById("impossibleBtn") as HTMLButtonElement;
 
 // ==================== Game State ====================
 let board: CellState[][] = [];
@@ -415,18 +416,35 @@ function calculateAIMove(): { row: number; col: number } | null {
   const emptyCells = getEmptyCells();
   if (emptyCells.length === 0) return null;
   
-  // Easy: Random with some basic awareness
+  // Easy: 60% smart with 50% noise, 40% random
   if (difficulty === "easy") {
-    // 30% chance to make a smart move
-    if (Math.random() < 0.3) {
-      const smartMove = findBestMove();
+    if (Math.random() < 0.6) {
+      const smartMove = findBestMove(0.5);
       if (smartMove) return smartMove;
     }
     return emptyCells[Math.floor(Math.random() * emptyCells.length)];
   }
   
-  // Medium and Hard: Use strategic evaluation
-  return findBestMove();
+  // Medium: 70% smart with 40% noise, 30% random
+  if (difficulty === "medium") {
+    if (Math.random() < 0.7) {
+      const smartMove = findBestMove(0.4);
+      if (smartMove) return smartMove;
+    }
+    return emptyCells[Math.floor(Math.random() * emptyCells.length)];
+  }
+  
+  // Hard: 80% smart with 20% noise, 20% random
+  if (difficulty === "hard") {
+    if (Math.random() < 0.8) {
+      const smartMove = findBestMove(0.2);
+      if (smartMove) return smartMove;
+    }
+    return emptyCells[Math.floor(Math.random() * emptyCells.length)];
+  }
+  
+  // Impossible: 100% smart, 0% noise - perfect play
+  return findBestMove(0);
 }
 
 /**
@@ -446,8 +464,9 @@ function getEmptyCells(): Array<{ row: number; col: number }> {
 
 /**
  * Finds the best move using scoring system
+ * @param noise - Score randomness factor (0 = perfect, 0.5 = 50% noise)
  */
-function findBestMove(): { row: number; col: number } | null {
+function findBestMove(noise: number): { row: number; col: number } | null {
   const candidates = getCandidateMoves();
   if (candidates.length === 0) {
     // First move - play center
@@ -458,7 +477,14 @@ function findBestMove(): { row: number; col: number } | null {
   let bestMove: { row: number; col: number } | null = null;
   
   for (const cell of candidates) {
-    const score = evaluateMove(cell.row, cell.col);
+    let score = evaluateMove(cell.row, cell.col);
+    
+    // Add noise to make AI imperfect (but never miss winning/blocking moves)
+    if (noise > 0 && score < 50000) {
+      const randomFactor = 1 + (Math.random() - 0.5) * 2 * noise;
+      score = score * randomFactor;
+    }
+    
     if (score > bestScore) {
       bestScore = score;
       bestMove = cell;
@@ -654,6 +680,7 @@ function setDifficulty(diff: Difficulty): void {
   easyBtn.classList.toggle("active", diff === "easy");
   mediumBtn.classList.toggle("active", diff === "medium");
   hardBtn.classList.toggle("active", diff === "hard");
+  impossibleBtn.classList.toggle("active", diff === "impossible");
   
   // Restart game
   initGame();
@@ -671,6 +698,7 @@ pveBtn.addEventListener("click", () => setGameMode("pve"));
 easyBtn.addEventListener("click", () => setDifficulty("easy"));
 mediumBtn.addEventListener("click", () => setDifficulty("medium"));
 hardBtn.addEventListener("click", () => setDifficulty("hard"));
+impossibleBtn.addEventListener("click", () => setDifficulty("impossible"));
 
 /**
  * Keyboard support - U to undo, R to restart

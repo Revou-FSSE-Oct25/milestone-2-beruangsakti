@@ -45,6 +45,7 @@
           <span>🎯 9 Attempts</span>
           <span>📊 Tracks Best</span>
         </div>
+        <div class="card-keys">⌨️ Enter to guess</div>
         <a href="games/number_guess.html" class="btn card-btn">Play Now →</a>
       </div>
 
@@ -56,6 +57,7 @@
           <span>🥋 Best of 5</span>
           <span>📊 W/L Record</span>
         </div>
+        <div class="card-keys">⌨️ R / P / S keys</div>
         <a href="games/rps.html" class="btn card-btn">Play Now →</a>
       </div>
 
@@ -67,10 +69,12 @@
           <span>⏱️ 10 Seconds</span>
           <span>📊 High Score</span>
         </div>
+        <div class="card-keys">⌨️ Space to click</div>
         <a href="games/clicker.html" class="btn card-btn">Play Now →</a>
       </div>
 
       <div class="game-card go-theme">
+        <span class="card-badge ai-badge">🤖 vs AI</span>
         <div class="card-icon">⚫</div>
         <h3>Gomoku</h3>
         <p>Five in a Row! Place stones on a 15×15 board to win.</p>
@@ -78,15 +82,74 @@
           <span>🎯 15×15 Board</span>
           <span>📊 Win Record</span>
         </div>
+        <div class="card-keys">⌨️ U undo / R restart</div>
         <a href="games/gomoku.html" class="btn card-btn">Play Now →</a>
       </div>
 
     </div>
   </main>
 
+  <section class="stats-summary">
+    <h2 class="section-title">📊 Your Stats</h2>
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <span class="stat-icon">🕹️</span>
+        <span class="stat-value" id="clickerHighScore">-</span>
+        <span class="stat-name">Clicker Best</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">🔍</span>
+        <span class="stat-value" id="guessGamesPlayed">-</span>
+        <span class="stat-name">Guess Games</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">⚔️</span>
+        <span class="stat-value" id="rpsWinRate">-</span>
+        <span class="stat-name">RPS Win Rate</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">⚫</span>
+        <span class="stat-value" id="gomokuWins">-</span>
+        <span class="stat-name">Gomoku Wins</span>
+      </div>
+    </div>
+  </section>
+
   <footer>
-    <p>© 2025 Happy? | Built with HTML, CSS, and JavaScript</p>
+    <p>© 2025 Happy? | Built with HTML, CSS, and TypeScript</p>
   </footer>
+
+  <script>
+    // Load stats from localStorage
+    function loadStats() {
+      // Clicker high score
+      const clickerHigh = localStorage.getItem('clickerHigh') || '0';
+      document.getElementById('clickerHighScore').textContent = clickerHigh;
+      
+      // Number guess games played
+      const guessGames = localStorage.getItem('guessTotal') || '0';
+      document.getElementById('guessGamesPlayed').textContent = guessGames;
+      
+      // RPS win rate
+      const rpsWins = parseInt(localStorage.getItem('rpsWins') || '0');
+      const rpsLosses = parseInt(localStorage.getItem('rpsLosses') || '0');
+      const rpsTotal = rpsWins + rpsLosses;
+      if (rpsTotal > 0) {
+        const winRate = Math.round((rpsWins / rpsTotal) * 100);
+        document.getElementById('rpsWinRate').textContent = winRate + '%';
+      } else {
+        document.getElementById('rpsWinRate').textContent = '-';
+      }
+      
+      // Gomoku wins (black + white)
+      const gomokuBlack = parseInt(localStorage.getItem('gomokuBlackWins') || '0');
+      const gomokuWhite = parseInt(localStorage.getItem('gomokuWhiteWins') || '0');
+      const totalWins = gomokuBlack + gomokuWhite;
+      document.getElementById('gomokuWins').textContent = totalWins > 0 ? totalWins : '-';
+    }
+    
+    loadStats();
+  </script>
 
 </body>
 </html>
