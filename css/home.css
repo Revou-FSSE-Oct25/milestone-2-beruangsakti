@@ -215,6 +215,27 @@ body::before {
   background: linear-gradient(145deg, #fb7185, #e11d48);
 }
 
+/* Go Theme - Gomoku */
+.go-theme::before {
+  background: linear-gradient(90deg, #b8860b, #d4af37);
+}
+
+.go-theme:hover {
+  border-color: #d4af37;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(212, 175, 55, 0.2);
+}
+
+.go-theme .card-btn {
+  background: linear-gradient(145deg, #8b4513, #654321);
+  border: 2px solid #d4af37;
+}
+
+.go-theme .card-btn:hover {
+  background: linear-gradient(145deg, #a0522d, #8b4513);
+}
+
 /* ===== FOOTER ===== */
 footer {
   border-top: 1px solid var(--color-border-light);

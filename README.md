@@ -65,7 +65,7 @@ Test your speed! Click as fast as you can in 10 seconds.
 
 - HTML5
 - CSS3 (with CSS Custom Properties)
-- Vanilla JavaScript
+- **TypeScript** (compiled to JavaScript)
 - localStorage for score persistence
 
 ## 📁 Project Structure
@@ -77,7 +77,44 @@ Test your speed! Click as fast as you can in 10 seconds.
 │   ├── home.css        # Homepage styles
 │   ├── clicker.css     # Clicker game theme
 │   ├── number-guess.css # Number Guess theme
-│   └── rps.css         # Rock Paper Scissors theme
+│   ├── rps.css         # Rock Paper Scissors theme
+│   └── gomoku.css      # Gomoku game theme
+├── src/                # TypeScript source files
+│   ├── utils.ts        # Shared utilities
+│   ├── clicker.ts      # Clicker game logic
+│   ├── number_guess.ts # Number Guess logic
+│   ├── rps.ts          # RPS game logic
+│   └── gomoku.ts       # Gomoku game logic
+├── dist/js/            # Compiled JavaScript (generated)
+└── games/
+    ├── clicker.html    # Clicker game page
+    ├── number_guess.html # Number Guess page
+    ├── rps.html        # RPS game page
+    └── gomoku.html     # Gomoku game page
+```
+
+## 🚀 Getting Started
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Build TypeScript: `npm run build`
+4. Open `index.html` in your browser
+5. Choose a game and start playing!
+
+### Development Mode
+
+Run `npm run watch` to automatically recompile TypeScript on file changes.
+
+## 📝 Concepts Used
+
+### TypeScript Features
+- Type annotations and interfaces
+- Union types (`Choice = "rock" | "paper" | "scissors"`)
+- Type assertions (`as HTMLButtonElement`)
+- Strict null checking
+- JSDoc documentation
+
+### JavaScript/TypeScript Concepts
 ├── js/
 │   ├── clicker.js      # Clicker game logic
 │   ├── number_guess.js # Number Guess logic
@@ -94,8 +131,7 @@ Test your speed! Click as fast as you can in 10 seconds.
 2. Open `index.html` in your browser
 3. Choose a game and start playing!
 
-## 📝 JavaScript Concepts Used
-
+### JavaScript/TypeScript Concepts
 - DOM Manipulation (`getElementById`, `querySelector`, `createElement`)
 - Event Listeners (`click`, keyboard events)
 - Conditional Statements (`if/else`, `switch`)

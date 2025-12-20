@@ -1,2 +1,11 @@
 # VS Code settings
 .vscode/
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# TypeScript cache
+*.tsbuildinfo

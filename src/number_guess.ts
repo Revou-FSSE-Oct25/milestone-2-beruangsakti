@@ -4,72 +4,44 @@
  * Features: Guess history, range narrowing, win streak, confetti celebration
  */
 
+import { safeGetItem, safeSetItem, createConfetti } from "./utils.js";
+
+// ==================== Type Definitions ====================
+type GuessResult = "high" | "low" | "correct";
+
 // ==================== DOM Elements ====================
-const guessInput = document.getElementById("guessInput");
-const guessBtn = document.getElementById("guessBtn");
-const restartBtn = document.getElementById("restartBtn");
-const feedback = document.getElementById("feedback");
-const attemptsText = document.getElementById("attempts");
-const bestScoreText = document.getElementById("bestScore");
-const guessHistory = document.getElementById("guessHistory");
-const rangeHintText = document.getElementById("rangeHint");
-const winStreakText = document.getElementById("winStreak");
-const confettiContainer = document.getElementById("confetti-container");
+const guessInput = document.getElementById("guessInput") as HTMLInputElement;
+const guessBtn = document.getElementById("guessBtn") as HTMLButtonElement;
+const restartBtn = document.getElementById("restartBtn") as HTMLButtonElement;
+const feedback = document.getElementById("feedback") as HTMLDivElement;
+const attemptsText = document.getElementById("attempts") as HTMLSpanElement;
+const bestScoreText = document.getElementById("bestScore") as HTMLSpanElement;
+const guessHistory = document.getElementById("guessHistory") as HTMLDivElement;
+const rangeHintText = document.getElementById("rangeHint") as HTMLDivElement;
+const winStreakText = document.getElementById("winStreak") as HTMLSpanElement;
+const confettiContainer = document.getElementById("confetti-container") as HTMLDivElement;
 
 // ==================== Game State ====================
-let secretNumber;
-let attemptsLeft;
-let attemptsUsed;
-let gameOver;
-let guesses = [];  // Array to store all guesses
-let bestScore = safeGetItem("guessGameBest", null);
-let winStreak = Number(safeGetItem("guessGameStreak", 0));
-let rangeMin = 1;
-let rangeMax = 100;
-
-// ==================== Storage Helpers ====================
-
-/**
- * Safely retrieves an item from localStorage
- * @param {string} key - The storage key
- * @param {*} defaultValue - Default value if retrieval fails
- * @returns {*} The stored value or default
- */
-function safeGetItem(key, defaultValue) {
-  try {
-    const value = localStorage.getItem(key);
-    return value !== null ? value : defaultValue;
-  } catch (e) {
-    console.warn("localStorage not available:", e.message);
-    return defaultValue;
-  }
-}
-
-/**
- * Safely stores an item in localStorage
- * @param {string} key - The storage key
- * @param {*} value - The value to store
- */
-function safeSetItem(key, value) {
-  try {
-    localStorage.setItem(key, value);
-  } catch (e) {
-    console.warn("localStorage not available:", e.message);
-  }
-}
+let secretNumber: number = 0;
+let attemptsLeft: number = 9;
+let attemptsUsed: number = 0;
+let gameOver: boolean = false;
+let bestScore: number | null = safeGetItem("guessGameBest", null) ? Number(safeGetItem("guessGameBest", null)) : null;
+let winStreak: number = Number(safeGetItem("guessGameStreak", "0"));
+let rangeMin: number = 1;
+let rangeMax: number = 100;
 
 // ==================== Game Functions ====================
 
 /**
  * Initializes the game with a new secret number and resets UI
  */
-function initGame() {
+function initGame(): void {
   // Generate random number between 1-100
   secretNumber = Math.floor(Math.random() * 100) + 1;
   attemptsLeft = 9;
   attemptsUsed = 0;
   gameOver = false;
-  guesses = [];
   rangeMin = 1;
   rangeMax = 100;
 
@@ -77,8 +49,8 @@ function initGame() {
   feedback.textContent = "Awaiting your first lead...";
   feedback.className = "feedback-box case-notes";
   attemptsText.textContent = "9";
-  bestScoreText.textContent = bestScore ? bestScore : "-";
-  winStreakText.textContent = winStreak;
+  bestScoreText.textContent = bestScore ? String(bestScore) : "-";
+  winStreakText.textContent = String(winStreak);
   rangeHintText.textContent = "Suspect range: 1 - 100";
   rangeHintText.className = "range-hint evidence-note";
   guessHistory.innerHTML = "";
@@ -91,15 +63,15 @@ function initGame() {
 
 /**
  * Adds a guess chip to the history display
- * @param {number} guess - The guessed number
- * @param {string} result - "high", "low", or "correct"
+ * @param guess - The guessed number
+ * @param result - "high", "low", or "correct"
  */
-function addGuessToHistory(guess, result) {
+function addGuessToHistory(guess: number, result: GuessResult): void {
   const chip = document.createElement("span");
   chip.classList.add("guess-chip", result);
   
   // Add directional arrow based on result
-  let arrow = "";
+  let arrow: string = "";
   switch (result) {
     case "high":
       arrow = " ↑";
@@ -122,10 +94,10 @@ function addGuessToHistory(guess, result) {
  * Validates and processes the player's guess
  * Updates feedback, history, and checks win/lose conditions
  */
-function checkGuess() {
+function checkGuess(): void {
   if (gameOver) return;
 
-  const guess = Number(guessInput.value);
+  const guess: number = Number(guessInput.value);
 
   // Validate input is within range
   if (!guess || guess < 1 || guess > 100) {
@@ -138,7 +110,7 @@ function checkGuess() {
 
   attemptsLeft--;
   attemptsUsed++;
-  attemptsText.textContent = attemptsLeft;
+  attemptsText.textContent = String(attemptsLeft);
 
   // Check if guess is correct
   if (guess === secretNumber) {
@@ -149,17 +121,17 @@ function checkGuess() {
     // Update win streak
     winStreak++;
     safeSetItem("guessGameStreak", winStreak);
-    winStreakText.textContent = winStreak;
+    winStreakText.textContent = String(winStreak);
     
     // Check for new best score
     if (!bestScore || attemptsUsed < bestScore) {
       bestScore = attemptsUsed;
       safeSetItem("guessGameBest", bestScore);
-      bestScoreText.textContent = bestScore;
+      bestScoreText.textContent = String(bestScore);
     }
     
     // Trigger confetti!
-    createConfetti();
+    createConfetti(confettiContainer, "detective");
     
     endGame();
   } else if (guess > secretNumber) {
@@ -186,7 +158,7 @@ function checkGuess() {
     // Reset win streak on loss
     winStreak = 0;
     safeSetItem("guessGameStreak", winStreak);
-    winStreakText.textContent = winStreak;
+    winStreakText.textContent = String(winStreak);
     endGame();
   }
 
@@ -197,7 +169,7 @@ function checkGuess() {
 /**
  * Disables input when game is over
  */
-function endGame() {
+function endGame(): void {
   gameOver = true;
   guessInput.disabled = true;
   guessBtn.disabled = true;
@@ -206,40 +178,17 @@ function endGame() {
 /**
  * Updates the range hint display with current narrowed range
  */
-function updateRangeHint() {
+function updateRangeHint(): void {
   rangeHintText.textContent = `Suspect range: ${rangeMin} - ${rangeMax}`;
   rangeHintText.classList.add("range-updated");
   setTimeout(() => rangeHintText.classList.remove("range-updated"), 300);
-}
-
-/**
- * Creates confetti animation on win
- * Uses for loop to generate 50 confetti pieces
- */
-function createConfetti() {
-  const colors = ["#a78bfa", "#4ade80", "#fbbf24", "#f87171", "#60a5fa", "#38bdf8"];
-  
-  for (let i = 0; i < 50; i++) {
-    const confetti = document.createElement("div");
-    confetti.classList.add("confetti");
-    confetti.style.left = Math.random() * 100 + "%";
-    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-    confetti.style.animationDelay = Math.random() * 0.5 + "s";
-    confetti.style.animationDuration = (Math.random() * 1 + 2) + "s";
-    confettiContainer.appendChild(confetti);
-  }
-  
-  // Clean up confetti after animation
-  setTimeout(() => {
-    confettiContainer.innerHTML = "";
-  }, 3000);
 }
 
 // ==================== Event Listeners ====================
 guessBtn.addEventListener("click", checkGuess);
 
 // Allow Enter key to submit guess
-guessInput.addEventListener("keydown", function (e) {
+guessInput.addEventListener("keydown", function (e: KeyboardEvent): void {
   if (e.key === "Enter") {
     checkGuess();
   }
@@ -250,7 +199,7 @@ restartBtn.addEventListener("click", initGame);
 /**
  * Keyboard support - R to restart game
  */
-document.addEventListener("keydown", function(e) {
+document.addEventListener("keydown", function(e: KeyboardEvent): void {
   if (e.key === "r" || e.key === "R") {
     // Only restart if not typing in input
     if (document.activeElement !== guessInput) {

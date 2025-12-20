@@ -4,77 +4,59 @@
  * Features: Round tracking, lifetime stats with localStorage
  */
 
+import { safeGetItem, safeSetItem, createConfetti } from "./utils.js";
+
+// ==================== Type Definitions ====================
+type Choice = "rock" | "paper" | "scissors";
+type RoundWinner = "player" | "computer" | "draw";
+type MatchWinner = "player" | "computer" | "draw";
+
+interface EmojiMap {
+  rock: string;
+  paper: string;
+  scissors: string;
+}
+
 // ==================== DOM Elements ====================
-const weaponBtns = document.querySelectorAll(".weapon-btn");
-const playerChoiceEl = document.getElementById("playerChoice");
-const computerChoiceEl = document.getElementById("computerChoice");
-const resultBox = document.getElementById("resultBox");
-const playerScoreEl = document.getElementById("playerScore");
-const computerScoreEl = document.getElementById("computerScore");
-const currentRoundEl = document.getElementById("currentRound");
-const nextRoundBtn = document.getElementById("nextRoundBtn");
-const newMatchBtn = document.getElementById("newMatchBtn");
-const matchResultEl = document.getElementById("matchResult");
-const totalWinsEl = document.getElementById("totalWins");
-const totalLossesEl = document.getElementById("totalLosses");
-const totalDrawsEl = document.getElementById("totalDraws");
-const confettiContainer = document.getElementById("confetti-container");
+const weaponBtns = document.querySelectorAll<HTMLButtonElement>(".weapon-btn");
+const playerChoiceEl = document.getElementById("playerChoice") as HTMLDivElement;
+const computerChoiceEl = document.getElementById("computerChoice") as HTMLDivElement;
+const resultBox = document.getElementById("resultBox") as HTMLDivElement;
+const playerScoreEl = document.getElementById("playerScore") as HTMLSpanElement;
+const computerScoreEl = document.getElementById("computerScore") as HTMLSpanElement;
+const currentRoundEl = document.getElementById("currentRound") as HTMLSpanElement;
+const nextRoundBtn = document.getElementById("nextRoundBtn") as HTMLButtonElement;
+const newMatchBtn = document.getElementById("newMatchBtn") as HTMLButtonElement;
+const matchResultEl = document.getElementById("matchResult") as HTMLDivElement;
+const totalWinsEl = document.getElementById("totalWins") as HTMLSpanElement;
+const totalLossesEl = document.getElementById("totalLosses") as HTMLSpanElement;
+const totalDrawsEl = document.getElementById("totalDraws") as HTMLSpanElement;
+const confettiContainer = document.getElementById("confetti-container") as HTMLDivElement;
 
 // ==================== Game Data ====================
-const choices = ["rock", "paper", "scissors"];  // Array of valid choices
-const emojis = { rock: "🪨", paper: "📜", scissors: "✂️" };  // Object mapping choices to emojis
+const choices: Choice[] = ["rock", "paper", "scissors"];  // Array of valid choices
+const emojis: EmojiMap = { rock: "🪨", paper: "📜", scissors: "✂️" };  // Object mapping choices to emojis
 
 // ==================== Game State ====================
-let playerScore = 0;
-let computerScore = 0;
-let currentRound = 1;
-let totalRounds = 5;
-let winsNeeded = 3;
-let roundOver = false;
-let matchOver = false;
+let playerScore: number = 0;
+let computerScore: number = 0;
+let currentRound: number = 1;
+const totalRounds: number = 5;
+const winsNeeded: number = 3;
+let roundOver: boolean = false;
+let matchOver: boolean = false;
 
 // Lifetime stats from localStorage
-let totalWins = Number(safeGetItem("rpsWins", 0));
-let totalLosses = Number(safeGetItem("rpsLosses", 0));
-let totalDraws = Number(safeGetItem("rpsDraws", 0));
-
-// ==================== Storage Helpers ====================
-
-/**
- * Safely retrieves an item from localStorage
- * @param {string} key - The storage key
- * @param {*} defaultValue - Default value if retrieval fails
- * @returns {*} The stored value or default
- */
-function safeGetItem(key, defaultValue) {
-  try {
-    const value = localStorage.getItem(key);
-    return value !== null ? value : defaultValue;
-  } catch (e) {
-    console.warn("localStorage not available:", e.message);
-    return defaultValue;
-  }
-}
-
-/**
- * Safely stores an item in localStorage
- * @param {string} key - The storage key
- * @param {*} value - The value to store
- */
-function safeSetItem(key, value) {
-  try {
-    localStorage.setItem(key, value);
-  } catch (e) {
-    console.warn("localStorage not available:", e.message);
-  }
-}
+let totalWins: number = Number(safeGetItem("rpsWins", "0"));
+let totalLosses: number = Number(safeGetItem("rpsLosses", "0"));
+let totalDraws: number = Number(safeGetItem("rpsDraws", "0"));
 
 // ==================== Game Functions ====================
 
 /**
  * Initializes a new match and resets all scores
  */
-function initMatch() {
+function initMatch(): void {
   playerScore = 0;
   computerScore = 0;
   currentRound = 1;
@@ -103,27 +85,27 @@ function initMatch() {
 /**
  * Updates the lifetime stats display from localStorage
  */
-function updateLifetimeStats() {
-  totalWinsEl.textContent = totalWins;
-  totalLossesEl.textContent = totalLosses;
-  totalDrawsEl.textContent = totalDraws;
+function updateLifetimeStats(): void {
+  totalWinsEl.textContent = String(totalWins);
+  totalLossesEl.textContent = String(totalLosses);
+  totalDrawsEl.textContent = String(totalDraws);
 }
 
 /**
  * Randomly selects computer's choice from the choices array
- * @returns {string} "rock", "paper", or "scissors"
+ * @returns "rock", "paper", or "scissors"
  */
-function getComputerChoice() {
+function getComputerChoice(): Choice {
   return choices[Math.floor(Math.random() * choices.length)];
 }
 
 /**
  * Determines the winner using logical operators
- * @param {string} player - Player's choice
- * @param {string} computer - Computer's choice
- * @returns {string} "player", "computer", or "draw"
+ * @param player - Player's choice
+ * @param computer - Computer's choice
+ * @returns "player", "computer", or "draw"
  */
-function determineWinner(player, computer) {
+function determineWinner(player: Choice, computer: Choice): RoundWinner {
   if (player === computer) return "draw";
   
   // Win conditions using logical AND (&&) and OR (||)
@@ -139,13 +121,13 @@ function determineWinner(player, computer) {
 
 /**
  * Plays a single round of RPS
- * @param {string} playerChoice - The player's weapon choice
+ * @param playerChoice - The player's weapon choice
  */
-function playRound(playerChoice) {
+function playRound(playerChoice: Choice): void {
   if (roundOver || matchOver) return;
 
-  const computerChoice = getComputerChoice();
-  const winner = determineWinner(playerChoice, computerChoice);
+  const computerChoice: Choice = getComputerChoice();
+  const winner: RoundWinner = determineWinner(playerChoice, computerChoice);
 
   // Display choices with emojis from object
   playerChoiceEl.textContent = emojis[playerChoice];
@@ -158,14 +140,14 @@ function playRound(playerChoice) {
   // Update scores and result based on winner
   if (winner === "player") {
     playerScore++;
-    playerScoreEl.textContent = playerScore;
+    playerScoreEl.textContent = String(playerScore);
     resultBox.textContent = "🎉 You win this round!";
     resultBox.className = "result-box win";
     playerChoiceEl.classList.add("winner");
     computerChoiceEl.classList.add("loser");
   } else if (winner === "computer") {
     computerScore++;
-    computerScoreEl.textContent = computerScore;
+    computerScoreEl.textContent = String(computerScore);
     resultBox.textContent = "😔 Sensei wins this round!";
     resultBox.className = "result-box lose";
     computerChoiceEl.classList.add("winner");
@@ -201,9 +183,9 @@ function playRound(playerChoice) {
 /**
  * Advances to the next round and resets round state
  */
-function nextRound() {
+function nextRound(): void {
   currentRound++;
-  currentRoundEl.textContent = currentRound;
+  currentRoundEl.textContent = String(currentRound);
   roundOver = false;
 
   // Reset choice displays
@@ -221,9 +203,9 @@ function nextRound() {
 /**
  * Ends the match and displays final result
  * Updates lifetime stats in localStorage
- * @param {string} winner - "player", "computer", or "draw"
+ * @param winner - "player", "computer", or "draw"
  */
-function endMatch(winner) {
+function endMatch(winner: MatchWinner): void {
   matchOver = true;
   nextRoundBtn.classList.add("hidden");
   matchResultEl.classList.remove("hidden");
@@ -235,7 +217,7 @@ function endMatch(winner) {
       matchResultEl.classList.add("victory");
       totalWins++;
       safeSetItem("rpsWins", totalWins);
-      createConfetti();
+      createConfetti(confettiContainer, "samurai", 60);
       break;
     case "computer":
       matchResultEl.textContent = "🗡️ DEFEAT! Sensei prevails...";
@@ -256,45 +238,26 @@ function endMatch(winner) {
 /**
  * Disables all weapon buttons
  */
-function disableWeapons() {
+function disableWeapons(): void {
   weaponBtns.forEach(btn => btn.disabled = true);
 }
 
 /**
  * Enables all weapon buttons
  */
-function enableWeapons() {
+function enableWeapons(): void {
   weaponBtns.forEach(btn => btn.disabled = false);
-}
-
-/**
- * Creates confetti animation for victory celebration
- */
-function createConfetti() {
-  const colors = ["#d4af37", "#8b0000", "#22c55e", "#fbbf24", "#dc2626", "#fef2f2"];
-  
-  for (let i = 0; i < 60; i++) {
-    const confetti = document.createElement("div");
-    confetti.classList.add("confetti");
-    confetti.style.left = Math.random() * 100 + "%";
-    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-    confetti.style.animationDelay = Math.random() * 0.5 + "s";
-    confetti.style.animationDuration = (Math.random() * 1 + 2) + "s";
-    confettiContainer.appendChild(confetti);
-  }
-  
-  // Clean up confetti after animation
-  setTimeout(() => {
-    confettiContainer.innerHTML = "";
-  }, 3000);
 }
 
 // ==================== Event Listeners ====================
 
 // Add click listener to each weapon button using forEach
 weaponBtns.forEach(btn => {
-  btn.addEventListener("click", function() {
-    playRound(this.dataset.choice);  // Get choice from data attribute
+  btn.addEventListener("click", function(this: HTMLButtonElement): void {
+    const choice = this.dataset.choice as Choice;
+    if (choice) {
+      playRound(choice);  // Get choice from data attribute
+    }
   });
 });
 
@@ -306,7 +269,7 @@ newMatchBtn.addEventListener("click", initMatch);
  * 1/R = Rock, 2/P = Paper, 3/S = Scissors
  * Enter/Space = Next round, N = New match
  */
-document.addEventListener("keydown", function(e) {
+document.addEventListener("keydown", function(e: KeyboardEvent): void {
   // Weapon selection (only when round is active)
   if (!roundOver && !matchOver) {
     switch (e.key.toLowerCase()) {

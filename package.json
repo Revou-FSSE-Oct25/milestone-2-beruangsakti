@@ -1,0 +1,27 @@
+{
+  "name": "milestone-2-beruangsakti",
+  "version": "1.0.0",
+  "description": "Happy? - A collection of fun JavaScript games",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Revou-FSSE-Oct25/milestone-2-beruangsakti.git"
+  },
+  "keywords": ["games", "javascript", "typescript"],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Revou-FSSE-Oct25/milestone-2-beruangsakti/issues"
+  },
+  "homepage": "https://github.com/Revou-FSSE-Oct25/milestone-2-beruangsakti#readme",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
