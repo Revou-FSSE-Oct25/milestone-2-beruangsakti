@@ -8,28 +8,85 @@
 </head>
 <body>
 
-  <main>
-    <h1>Rock Paper Scissors</h1>
+  <main class="rps-page">
+    <div class="dojo-container">
+      <div class="katana-decor top-left"></div>
+      <div class="katana-decor top-right"></div>
+      
+      <div class="dojo-header">
+        <div class="brush-circle">
+          <span class="kanji-large">武</span>
+        </div>
+        <h1 class="dojo-title">剣術道場</h1>
+        <p class="dojo-title-en">The Way of the Blade</p>
+        <p class="dojo-subtitle">Rock • Paper • Scissors</p>
+      </div>
 
-    <p>
-      Choose <strong>Rock</strong>, <strong>Paper</strong>, or <strong>Scissors</strong>.<br>
-      The computer will choose randomly.
-    </p>
+      <div class="scroll-banner">
+        <span class="scroll-text">Round <span id="currentRound">1</span> of <span id="totalRounds">5</span> • First to <span id="winsNeeded">3</span></span>
+      </div>
 
-    <div class="game-controls">
-      <button class="choice-btn" data-choice="rock">Rock</button>
-      <button class="choice-btn" data-choice="paper">Paper</button>
-      <button class="choice-btn" data-choice="scissors">Scissors</button>
+      <div class="stats-panel dojo-stats">
+        <div class="stat-box player-score">
+          <span class="stat-label">🥋 You</span>
+          <span id="playerScore" class="stat-value">0</span>
+        </div>
+        <div class="stat-box vs-box">
+          <span class="stat-value">VS</span>
+        </div>
+        <div class="stat-box computer-score">
+          <span class="stat-label">🎯 Sensei</span>
+          <span id="computerScore" class="stat-value">0</span>
+        </div>
+      </div>
+
+      <div class="battle-arena">
+        <div class="fighter player-side">
+          <div id="playerChoice" class="choice-display">?</div>
+          <p class="fighter-label">You</p>
+        </div>
+        <div class="vs-divider">
+          <div class="clash-swords">
+            <span class="sword-left">⚔️</span>
+            <span class="sword-right">⚔️</span>
+          </div>
+        </div>
+        <div class="fighter computer-side">
+          <div id="computerChoice" class="choice-display">?</div>
+          <p class="fighter-label">Sensei</p>
+        </div>
+      </div>
+
+      <div id="resultBox" class="result-box">Ready your stance!</div>
+
+      <div class="weapon-selection">
+        <button class="weapon-btn" data-choice="rock" title="Rock">
+          <span class="weapon-emoji">🪨</span>
+          <span class="weapon-name">Rock</span>
+        </button>
+        <button class="weapon-btn" data-choice="paper" title="Paper">
+          <span class="weapon-emoji">📜</span>
+          <span class="weapon-name">Paper</span>
+        </button>
+        <button class="weapon-btn" data-choice="scissors" title="Scissors">
+          <span class="weapon-emoji">✂️</span>
+          <span class="weapon-name">Scissors</span>
+        </button>
+      </div>
+
+      <div id="matchResult" class="match-result hidden"></div>
+
+      <div class="action-buttons">
+        <button id="nextRoundBtn" class="next-round-btn hidden">Next Round</button>
+        <button id="newMatchBtn" class="new-match-btn">New Match</button>
+      </div>
+
+      <div class="lifetime-stats">
+        <p>Honor: <span id="totalWins">0</span>W - <span id="totalLosses">0</span>L - <span id="totalDraws">0</span>D</p>
+      </div>
     </div>
 
-    <p id="playerChoice">Your choice: -</p>
-    <p id="computerChoice">Computer choice: -</p>
-    <p id="result">Make your move!</p>
-
-    <button id="restartBtn">Restart Game</button>
-
-    <br /><br />
-
+    <br />
     <a href="../index.html">← Back to Home</a>
   </main>
 
