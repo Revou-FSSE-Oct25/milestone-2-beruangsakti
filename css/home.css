@@ -1,0 +1,222 @@
+/**
+ * Homepage Styles - RevoFun Game Website
+ * Enhanced hero section and themed game cards
+ */
+
+/* ===== PAGE BACKGROUND ===== */
+body {
+  background: 
+    radial-gradient(ellipse at top, rgba(56, 189, 248, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+    var(--color-bg-primary);
+  background-attachment: fixed;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 100px,
+      rgba(56, 189, 248, 0.03) 100px,
+      rgba(56, 189, 248, 0.03) 101px
+    );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  padding: 80px var(--spacing-lg) 60px;
+  text-align: center;
+}
+
+.hero-emoji {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: var(--spacing-md);
+  animation: bounce 2s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: 2px;
+}
+
+.hero-title .highlight {
+  color: var(--color-accent);
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+}
+
+.hero-tagline {
+  font-size: 1.3rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-lg);
+}
+
+.hero-features {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.feature {
+  background-color: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: var(--color-accent);
+}
+
+/* ===== SECTION TITLE ===== */
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-text-primary);
+}
+
+/* ===== GAME CARDS ===== */
+.game-card {
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.game-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--color-accent);
+}
+
+.game-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.game-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.game-card p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.card-stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  font-size: 0.8rem;
+  color: var(--color-text-subtle);
+}
+
+.card-btn {
+  width: 100%;
+  text-align: center;
+  padding: 12px var(--spacing-md);
+  transition: all 0.2s ease;
+}
+
+.card-btn:hover {
+  transform: scale(1.02);
+}
+
+/* ===== THEME SPECIFIC CARDS ===== */
+
+/* Detective Theme - Number Guess */
+.detective-theme::before {
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+}
+
+.detective-theme:hover {
+  border-color: #fbbf24;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(251, 191, 36, 0.1);
+}
+
+.detective-theme .card-btn {
+  background: linear-gradient(145deg, #ca8a04, #a16207);
+}
+
+.detective-theme .card-btn:hover {
+  background: linear-gradient(145deg, #eab308, #ca8a04);
+}
+
+/* Samurai Theme - RPS */
+.samurai-theme::before {
+  background: linear-gradient(90deg, #8b0000, #dc2626);
+}
+
+.samurai-theme:hover {
+  border-color: #8b0000;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(139, 0, 0, 0.2);
+}
+
+.samurai-theme .card-btn {
+  background: linear-gradient(145deg, #8b0000, #6b0000);
+  border: 1px solid #d4af37;
+  color: #d4af37;
+}
+
+.samurai-theme .card-btn:hover {
+  background: linear-gradient(145deg, #a00000, #8b0000);
+}
+
+/* Arcade Theme - Clicker */
+.arcade-theme::before {
+  background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+}
+
+.arcade-theme:hover {
+  border-color: #38bdf8;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(56, 189, 248, 0.2);
+}
+
+.arcade-theme .card-btn {
+  background: linear-gradient(145deg, #f43f5e, #be123c);
+  border: 2px solid #fda4af;
+}
+
+.arcade-theme .card-btn:hover {
+  background: linear-gradient(145deg, #fb7185, #e11d48);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  border-top: 1px solid var(--color-border-light);
+  padding-top: var(--spacing-lg);
+}

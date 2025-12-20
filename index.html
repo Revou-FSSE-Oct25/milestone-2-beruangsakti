@@ -5,35 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy? | Simple JavaScript Games</title>
   <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/home.css" />
 </head>
 <body>
 
   <header class="hero">
-    <h1>Happy?</h1>
-    <p>Simple, fun JavaScript games you can play instantly 🎮</p>
+    <span class="hero-emoji">🎮</span>
+    <h1 class="hero-title">Happy<span class="highlight">?</span></h1>
+    <p class="hero-tagline">Simple, fun JavaScript games you can play instantly</p>
+    <div class="hero-features">
+      <span class="feature">✨ No downloads</span>
+      <span class="feature">🎯 3 Games</span>
+      <span class="feature">🏆 Track scores</span>
+    </div>
   </header>
 
   <main class="games">
-    <h2>Our Games</h2>
+    <h2 class="section-title">Choose Your Game</h2>
 
     <div class="game-list">
 
-      <div class="game-card">
-        <h3>Number Guessing Game</h3>
-        <p>Guess the hidden number with limited attempts.</p>
-        <a href="games/number_guess.html" class="btn">Play Now</a>
+      <div class="game-card detective-theme">
+        <div class="card-icon">🔍</div>
+        <h3>Number Guessing</h3>
+        <p>Crack the case! Find the hidden number in 9 attempts.</p>
+        <div class="card-stats">
+          <span>🎯 9 Attempts</span>
+          <span>📊 Tracks Best</span>
+        </div>
+        <a href="games/number_guess.html" class="btn card-btn">Play Now →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card samurai-theme">
+        <div class="card-icon">⚔️</div>
         <h3>Rock Paper Scissors</h3>
-        <p>Play the classic game against the computer.</p>
-        <a href="games/rps.html" class="btn">Play Now</a>
+        <p>Enter the dojo! Best of 5 against the Sensei.</p>
+        <div class="card-stats">
+          <span>🥋 Best of 5</span>
+          <span>📊 W/L Record</span>
+        </div>
+        <a href="games/rps.html" class="btn card-btn">Play Now →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card arcade-theme">
+        <div class="card-icon">🕹️</div>
         <h3>Clicker Game</h3>
-        <p>Click as fast as you can before time runs out.</p>
-        <a href="games/clicker.html" class="btn">Play Now</a>
+        <p>Test your speed! Click as fast as you can in 10 seconds.</p>
+        <div class="card-stats">
+          <span>⏱️ 10 Seconds</span>
+          <span>📊 High Score</span>
+        </div>
+        <a href="games/clicker.html" class="btn card-btn">Play Now →</a>
       </div>
 
     </div>
