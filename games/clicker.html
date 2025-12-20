@@ -8,25 +8,38 @@
 </head>
 <body>
 
-  <main>
-    <h1>Clicker Game</h1>
+  <main class="clicker-page">
+    <div class="arcade-container">
+      <h1 class="arcade-title">🕹️ Clicker Game</h1>
 
-    <p>
-      Click the button as many times as you can in
-      <strong>10 seconds</strong>.
-    </p>
+      <p class="arcade-subtitle">
+        Click the button as many times as you can in
+        <strong>10 seconds</strong>!
+      </p>
 
-    <p id="timer">Time left: 10</p>
-    <p id="score">Score: 0</p>
+      <div class="stats-panel">
+        <div class="stat-box">
+          <span class="stat-label">TIME</span>
+          <span id="timer" class="stat-value">10</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">SCORE</span>
+          <span id="score" class="stat-value">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">BEST</span>
+          <span id="highScore" class="stat-value">0</span>
+        </div>
+      </div>
 
-    <button id="clickBtn">CLICK ME!</button>
+      <button id="clickBtn">CLICK!</button>
 
-    <br /><br />
+      <p id="finalMessage"></p>
 
-    <button id="restartBtn">Restart Game</button>
+      <button id="restartBtn" class="restart-btn">🔄 Play Again</button>
+    </div>
 
-    <br /><br />
-
+    <br />
     <a href="../index.html">← Back to Home</a>
   </main>
 
