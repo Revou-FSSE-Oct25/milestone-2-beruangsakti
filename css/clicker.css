@@ -1,0 +1,134 @@
+/**
+ * Clicker Game Styles - Retro Arcade Theme
+ * Theme: Neon arcade, glowing buttons, pixel-style UI
+ * Colors: Cyan (#38bdf8), Red (#f43f5e), Dark blue (#1e1e2e)
+ */
+
+/* ===== PAGE LAYOUT ===== */
+.clicker-page {
+  text-align: center;
+}
+
+/* ===== ARCADE CONTAINER ===== */
+.arcade-container {
+  background: linear-gradient(145deg, #1e1e2e, #0a0a14);
+  border: 3px solid #38bdf8;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 
+    0 0 20px rgba(56, 189, 248, 0.3),
+    inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== ARCADE TITLE ===== */
+.arcade-title {
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #38bdf8;
+  text-shadow: 
+    0 0 10px #38bdf8,
+    0 0 20px #38bdf8;
+  margin-bottom: 10px;
+}
+
+.arcade-subtitle {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+/* ===== CLICKER BUTTON ===== */
+#clickBtn {
+  font-size: 1.8rem;
+  padding: 0;
+  margin: 20px auto;
+  border-radius: 50%;
+  width: 160px;
+  height: 160px;
+  background: linear-gradient(145deg, #f43f5e, #be123c);
+  border: 4px solid #fda4af;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 
+    0 8px 0 #881337,
+    0 10px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.1s ease;
+  user-select: none;
+  font-weight: bold;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#clickBtn:hover:not(:disabled) {
+  background: linear-gradient(145deg, #fb7185, #e11d48);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 10px 0 #881337,
+    0 12px 25px rgba(0, 0, 0, 0.4);
+}
+
+#clickBtn:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 
+    0 4px 0 #881337,
+    0 6px 10px rgba(0, 0, 0, 0.4);
+}
+
+#clickBtn:disabled {
+  background: linear-gradient(145deg, #475569, #334155);
+  border-color: #64748b;
+  box-shadow: 0 4px 0 #1e293b;
+  color: #94a3b8;
+}
+
+/* Pop Animation */
+#clickBtn.pop {
+  animation: popEffect 0.15s ease;
+}
+
+@keyframes popEffect {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-5px) scale(1.05); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* ===== RESTART BUTTON ===== */
+.restart-btn {
+  background: linear-gradient(145deg, #22c55e, #16a34a);
+  border: 2px solid #86efac;
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.restart-btn:hover {
+  background: linear-gradient(145deg, #4ade80, #22c55e);
+}
+
+/* ===== COUNTDOWN WARNING ===== */
+.warning {
+  color: #f87171 !important;
+  font-weight: bold;
+  animation: pulse 0.5s ease infinite;
+  text-shadow: 0 0 10px #f87171;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ===== SCORE MESSAGE ===== */
+#finalMessage {
+  font-size: 1.4rem;
+  margin-top: 16px;
+  min-height: 35px;
+  color: #fbbf24;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+}

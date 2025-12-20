@@ -1,0 +1,359 @@
+/**
+ * Number Guessing Game Styles - Detective Case Theme
+ * Theme: Noir detective, case files, evidence board
+ * Colors: Cream (#fef3c7), Gold (#fbbf24), Brown (#78716c)
+ */
+
+/* ===== PAGE LAYOUT ===== */
+.guess-page {
+  text-align: center;
+}
+
+/* ===== CASE FILE CONTAINER ===== */
+.case-file {
+  background: linear-gradient(145deg, #1c1917, #292524);
+  border: 3px solid #78716c;
+  border-radius: 4px;
+  padding: 30px;
+  max-width: 450px;
+  margin: 0 auto;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    inset 0 0 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Paper texture overlay */
+.case-file::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 28px,
+    rgba(120, 113, 108, 0.1) 28px,
+    rgba(120, 113, 108, 0.1) 29px
+  );
+  pointer-events: none;
+  border-radius: 4px;
+}
+
+/* ===== CASE HEADER ===== */
+.case-header {
+  position: relative;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px dashed #57534e;
+}
+
+.case-stamp {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #dc2626;
+  color: #fff;
+  padding: 5px 12px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  transform: rotate(12deg);
+  border: 2px solid #fca5a5;
+}
+
+.case-title {
+  font-size: 1.8rem;
+  font-family: 'Courier New', monospace;
+  color: #fef3c7;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
+.case-subtitle {
+  font-size: 1rem;
+  color: #a8a29e;
+  font-style: italic;
+}
+
+/* ===== CASE BRIEF ===== */
+.case-brief {
+  background-color: rgba(254, 243, 199, 0.05);
+  border-left: 3px solid #fbbf24;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #d6d3d1;
+}
+
+.case-brief p {
+  margin-bottom: 5px;
+}
+
+.case-brief strong {
+  color: #fbbf24;
+}
+
+/* ===== CASE STATS ===== */
+.case-stats .stat-box {
+  background-color: rgba(41, 37, 36, 0.8);
+  border: 1px solid #57534e;
+}
+
+.case-stats .stat-label {
+  color: #a8a29e;
+  font-size: 0.65rem;
+}
+
+.case-stats .stat-value {
+  color: #fef3c7;
+  font-family: 'Courier New', monospace;
+}
+
+.case-stats .stat-box:nth-child(2) .stat-value {
+  color: #fbbf24;
+}
+
+/* ===== EVIDENCE NOTE (Range Hint) ===== */
+.evidence-note {
+  background-color: #fef3c7;
+  border: none;
+  border-radius: 2px;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  color: #1c1917;
+  transform: rotate(-1deg);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.evidence-note.range-updated {
+  transform: rotate(-1deg) scale(1.05);
+  background-color: #fde68a;
+}
+
+/* ===== INTERROGATION INPUT ===== */
+.interrogation-box {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.interrogation-box input {
+  width: 90px;
+  padding: 15px;
+  font-size: 1.6rem;
+  text-align: center;
+  background-color: #fef3c7;
+  border: 2px solid #92400e;
+  border-radius: 4px;
+  color: #1c1917;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+.interrogation-box input:focus {
+  outline: none;
+  border-color: #fbbf24;
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+}
+
+.interrogation-box input::placeholder {
+  color: #a8a29e;
+}
+
+.interrogation-box button {
+  padding: 15px 20px;
+  font-size: 1rem;
+  background: linear-gradient(145deg, #78716c, #57534e);
+  border: 2px solid #a8a29e;
+  color: #fef3c7;
+  border-radius: 4px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.interrogation-box button:hover:not(:disabled) {
+  background: linear-gradient(145deg, #a8a29e, #78716c);
+}
+
+.interrogation-box button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===== CASE NOTES (Feedback) ===== */
+.case-notes {
+  background-color: rgba(254, 243, 199, 0.08);
+  border: 1px solid #57534e;
+  border-radius: 4px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  font-family: 'Courier New', monospace;
+  min-height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d6d3d1;
+  transition: all 0.3s ease;
+}
+
+.case-notes.too-high {
+  border-color: #f87171;
+  color: #f87171;
+  background-color: rgba(248, 113, 113, 0.1);
+  animation: shake 0.4s ease;
+}
+
+.case-notes.too-low {
+  border-color: #60a5fa;
+  color: #60a5fa;
+  background-color: rgba(96, 165, 250, 0.1);
+  animation: shake 0.4s ease;
+}
+
+.case-notes.correct {
+  border-color: #4ade80;
+  color: #4ade80;
+  background-color: rgba(74, 222, 128, 0.1);
+  animation: celebrate 0.5s ease;
+}
+
+.case-notes.error {
+  border-color: #fbbf24;
+  color: #fbbf24;
+  background-color: rgba(251, 191, 36, 0.1);
+}
+
+/* ===== EVIDENCE BOARD ===== */
+.evidence-board {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: rgba(41, 37, 36, 0.5);
+  border: 1px dashed #57534e;
+  border-radius: 4px;
+}
+
+.evidence-board .history-title {
+  font-size: 0.85rem;
+  color: #a8a29e;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+  font-family: 'Courier New', monospace;
+}
+
+.evidence-board .guess-history {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+}
+
+.evidence-board .guess-chip {
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  position: relative;
+}
+
+.evidence-board .guess-chip::before {
+  content: '📌';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+}
+
+.evidence-board .guess-chip.high {
+  background-color: rgba(248, 113, 113, 0.2);
+  border: 1px solid #f87171;
+  color: #f87171;
+}
+
+.evidence-board .guess-chip.low {
+  background-color: rgba(96, 165, 250, 0.2);
+  border: 1px solid #60a5fa;
+  color: #60a5fa;
+}
+
+.evidence-board .guess-chip.correct {
+  background-color: rgba(74, 222, 128, 0.2);
+  border: 1px solid #4ade80;
+  color: #4ade80;
+}
+
+/* ===== NEW CASE BUTTON ===== */
+.new-case-btn {
+  background: linear-gradient(145deg, #ca8a04, #a16207);
+  border: 2px solid #fbbf24;
+  color: #1c1917;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.new-case-btn:hover {
+  background: linear-gradient(145deg, #eab308, #ca8a04);
+}
+
+/* ===== INPUT SHAKE ===== */
+.input-shake {
+  animation: shake 0.4s ease;
+  border-color: #f87171 !important;
+}
+
+/* ===== CONFETTI ===== */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.confetti {
+  position: absolute;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  animation: confetti-fall linear forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ===== WIN STREAK GLOW ===== */
+#winStreak {
+  transition: all 0.3s ease;
+}
+
+.vault-container .stat-box:nth-child(2) .stat-value {
+  color: #fbbf24;
+}
