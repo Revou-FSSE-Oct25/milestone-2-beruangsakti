@@ -24,8 +24,8 @@
 
 /* ===== CASE FILE CONTAINER ===== */
 .case-file {
-  background: linear-gradient(145deg, #1c1917, #292524);
-  border: 3px solid #78716c;
+  background: linear-gradient(145deg, var(--case-bg-dark), var(--case-bg-light));
+  border: 3px solid var(--case-border);
   border-radius: 4px;
   padding: 30px;
   max-width: 450px;
@@ -60,14 +60,14 @@
   position: relative;
   margin-bottom: 20px;
   padding-bottom: 15px;
-  border-bottom: 2px dashed #57534e;
+  border-bottom: 2px dashed var(--case-border-dark);
 }
 
 .case-stamp {
   position: absolute;
   top: -10px;
   right: -10px;
-  background-color: #dc2626;
+  background-color: var(--case-danger);
   color: #fff;
   padding: 5px 12px;
   font-size: 0.7rem;
@@ -79,27 +79,27 @@
 
 .case-title {
   font-size: 1.8rem;
-  font-family: 'Courier New', monospace;
-  color: #fef3c7;
+  font-family: var(--font-mono);
+  color: var(--case-cream);
   margin-bottom: 5px;
   letter-spacing: 1px;
 }
 
 .case-subtitle {
   font-size: 1rem;
-  color: #a8a29e;
+  color: var(--case-text-muted);
   font-style: italic;
 }
 
 /* ===== CASE BRIEF ===== */
 .case-brief {
   background-color: rgba(254, 243, 199, 0.05);
-  border-left: 3px solid #fbbf24;
+  border-left: 3px solid var(--case-gold);
   padding: 12px 15px;
   margin-bottom: 20px;
   text-align: left;
   font-size: 0.9rem;
-  color: #d6d3d1;
+  color: var(--case-text);
 }
 
 .case-brief p {
@@ -107,39 +107,39 @@
 }
 
 .case-brief strong {
-  color: #fbbf24;
+  color: var(--case-gold);
 }
 
 /* ===== CASE STATS ===== */
 .case-stats .stat-box {
   background-color: rgba(41, 37, 36, 0.8);
-  border: 1px solid #57534e;
+  border: 1px solid var(--case-border-dark);
 }
 
 .case-stats .stat-label {
-  color: #a8a29e;
+  color: var(--case-text-muted);
   font-size: 0.65rem;
 }
 
 .case-stats .stat-value {
-  color: #fef3c7;
-  font-family: 'Courier New', monospace;
+  color: var(--case-cream);
+  font-family: var(--font-mono);
 }
 
 .case-stats .stat-box:nth-child(2) .stat-value {
-  color: #fbbf24;
+  color: var(--case-gold);
 }
 
 /* ===== EVIDENCE NOTE (Range Hint) ===== */
 .evidence-note {
-  background-color: #fef3c7;
+  background-color: var(--case-cream);
   border: none;
   border-radius: 2px;
   padding: 12px 20px;
   margin-bottom: 20px;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
   font-size: 1rem;
-  color: #1c1917;
+  color: var(--case-bg-dark);
   transform: rotate(-1deg);
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
@@ -162,39 +162,39 @@
   padding: 15px;
   font-size: 1.6rem;
   text-align: center;
-  background-color: #fef3c7;
+  background-color: var(--case-cream);
   border: 2px solid #92400e;
   border-radius: 4px;
-  color: #1c1917;
-  font-family: 'Courier New', monospace;
+  color: var(--case-bg-dark);
+  font-family: var(--font-mono);
   font-weight: bold;
 }
 
 .interrogation-box input:focus {
   outline: none;
-  border-color: #fbbf24;
+  border-color: var(--case-gold);
   box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
 }
 
 .interrogation-box input::placeholder {
-  color: #a8a29e;
+  color: var(--case-text-muted);
 }
 
 .interrogation-box button {
   padding: 15px 20px;
   font-size: 1rem;
-  background: linear-gradient(145deg, #78716c, #57534e);
-  border: 2px solid #a8a29e;
-  color: #fef3c7;
+  background: linear-gradient(145deg, var(--case-border), var(--case-border-dark));
+  border: 2px solid var(--case-text-muted);
+  color: var(--case-cream);
   border-radius: 4px;
   font-weight: bold;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .interrogation-box button:hover:not(:disabled) {
-  background: linear-gradient(145deg, #a8a29e, #78716c);
+  background: linear-gradient(145deg, var(--case-text-muted), var(--case-border));
 }
 
 .interrogation-box button:disabled {
@@ -205,44 +205,44 @@
 /* ===== CASE NOTES (Feedback) ===== */
 .case-notes {
   background-color: rgba(254, 243, 199, 0.08);
-  border: 1px solid #57534e;
+  border: 1px solid var(--case-border-dark);
   border-radius: 4px;
   padding: 15px 20px;
   margin-bottom: 20px;
   font-size: 1.1rem;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
   min-height: 55px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #d6d3d1;
-  transition: all 0.3s ease;
+  color: var(--case-text);
+  transition: all var(--transition-normal);
 }
 
 .case-notes.too-high {
-  border-color: #f87171;
-  color: #f87171;
+  border-color: var(--case-high);
+  color: var(--case-high);
   background-color: rgba(248, 113, 113, 0.1);
   animation: shake 0.4s ease;
 }
 
 .case-notes.too-low {
-  border-color: #60a5fa;
-  color: #60a5fa;
+  border-color: var(--case-low);
+  color: var(--case-low);
   background-color: rgba(96, 165, 250, 0.1);
   animation: shake 0.4s ease;
 }
 
 .case-notes.correct {
-  border-color: #4ade80;
-  color: #4ade80;
+  border-color: var(--case-correct);
+  color: var(--case-correct);
   background-color: rgba(74, 222, 128, 0.1);
   animation: celebrate 0.5s ease;
 }
 
 .case-notes.error {
-  border-color: #fbbf24;
-  color: #fbbf24;
+  border-color: var(--case-gold);
+  color: var(--case-gold);
   background-color: rgba(251, 191, 36, 0.1);
 }
 
@@ -251,16 +251,16 @@
   margin: 20px 0;
   padding: 15px;
   background-color: rgba(41, 37, 36, 0.5);
-  border: 1px dashed #57534e;
+  border: 1px dashed var(--case-border-dark);
   border-radius: 4px;
 }
 
 .evidence-board .history-title {
   font-size: 0.85rem;
-  color: #a8a29e;
+  color: var(--case-text-muted);
   margin-bottom: 12px;
   letter-spacing: 1px;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
 }
 
 .evidence-board .guess-history {
@@ -276,7 +276,7 @@
   border-radius: 3px;
   font-size: 0.9rem;
   font-weight: bold;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
   position: relative;
 }
 
@@ -291,30 +291,30 @@
 
 .evidence-board .guess-chip.high {
   background-color: rgba(248, 113, 113, 0.2);
-  border: 1px solid #f87171;
-  color: #f87171;
+  border: 1px solid var(--case-high);
+  color: var(--case-high);
 }
 
 .evidence-board .guess-chip.low {
   background-color: rgba(96, 165, 250, 0.2);
-  border: 1px solid #60a5fa;
-  color: #60a5fa;
+  border: 1px solid var(--case-low);
+  color: var(--case-low);
 }
 
 .evidence-board .guess-chip.correct {
   background-color: rgba(74, 222, 128, 0.2);
-  border: 1px solid #4ade80;
-  color: #4ade80;
+  border: 1px solid var(--case-correct);
+  color: var(--case-correct);
 }
 
 /* ===== NEW CASE BUTTON ===== */
 .new-case-btn {
   background: linear-gradient(145deg, #ca8a04, #a16207);
-  border: 2px solid #fbbf24;
-  color: #1c1917;
+  border: 2px solid var(--case-gold);
+  color: var(--case-bg-dark);
   padding: 12px 24px;
   font-size: 1rem;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: bold;
@@ -327,44 +327,12 @@
 /* ===== INPUT SHAKE ===== */
 .input-shake {
   animation: shake 0.4s ease;
-  border-color: #f87171 !important;
-}
-
-/* ===== CONFETTI ===== */
-.confetti-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 1000;
-}
-
-.confetti {
-  position: absolute;
-  top: -10px;
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-  animation: confetti-fall linear forwards;
-}
-
-@keyframes confetti-fall {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(720deg);
-    opacity: 0;
-  }
+  border-color: var(--case-high) !important;
 }
 
 /* ===== WIN STREAK GLOW ===== */
 #winStreak {
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
