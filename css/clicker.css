@@ -4,8 +4,18 @@
  * Colors: Cyan (#38bdf8), Red (#f43f5e), Dark blue (#1e1e2e)
  */
 
-/* ===== PAGE LAYOUT ===== */
+/* ===== THEME VARIABLES ===== */
 .clicker-page {
+  --clicker-bg-dark: #0a0a14;
+  --clicker-bg-light: #1e1e2e;
+  --clicker-accent: #38bdf8;
+  --clicker-btn-primary: #f43f5e;
+  --clicker-btn-dark: #be123c;
+  --clicker-btn-shadow: #881337;
+  --clicker-success: #22c55e;
+  --clicker-warning: #f87171;
+  --clicker-gold: #fbbf24;
+  
   text-align: center;
 }
 

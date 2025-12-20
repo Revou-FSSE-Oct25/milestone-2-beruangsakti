@@ -4,8 +4,18 @@
  * Colors: Dark red (#8b0000), Gold (#d4af37), Black/Maroon
  */
 
-/* ===== PAGE LAYOUT ===== */
+/* ===== THEME VARIABLES ===== */
 .rps-page {
+  --dojo-bg-dark: #0d0d0d;
+  --dojo-bg-light: #1a0f0f;
+  --dojo-red: #8b0000;
+  --dojo-red-light: #a00000;
+  --dojo-gold: #d4af37;
+  --dojo-text: #fef2f2;
+  --dojo-text-muted: #a8a29e;
+  --dojo-victory: #22c55e;
+  --dojo-defeat: #dc2626;
+  
   text-align: center;
 }
 
@@ -99,13 +109,6 @@
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
-.japanese-text {
-  font-size: 0.9rem;
-  color: #8b0000;
-  letter-spacing: 8px;
-  opacity: 0.7;
-}
-
 .dojo-title {
   font-size: 2.2rem;
   color: #d4af37;
@@ -156,11 +159,6 @@
   color: #fef2f2;
   font-size: 0.9rem;
   letter-spacing: 2px;
-}
-
-/* Hide old match info */
-.match-info {
-  display: none;
 }
 
 /* ===== DOJO STATS ===== */
@@ -361,17 +359,6 @@
   50% { transform: rotate(45deg) scaleX(-1) translateX(3px); }
 }
 
-.clash-icon {
-  font-size: 2rem;
-  color: #fbbf24;
-  animation: clashPulse 1.5s ease infinite;
-}
-
-@keyframes clashPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.2); }
-}
-
 /* ===== RESULT BOX ===== */
 .result-box {
   background: linear-gradient(145deg, rgba(13, 13, 13, 0.8), rgba(26, 15, 15, 0.8));
@@ -471,12 +458,6 @@
 
 .weapon-emoji {
   font-size: 2.2rem;
-}
-
-.weapon-kanji {
-  font-size: 1.1rem;
-  color: #d4af37;
-  text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
 }
 
 .weapon-name {
@@ -591,9 +572,4 @@
 .lifetime-stats span {
   color: #d4af37;
   font-weight: bold;
-}
-
-/* ===== RPS CHOICE BUTTONS (Legacy) ===== */
-.choice-btn {
-  min-width: 120px;
 }

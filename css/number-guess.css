@@ -4,8 +4,21 @@
  * Colors: Cream (#fef3c7), Gold (#fbbf24), Brown (#78716c)
  */
 
-/* ===== PAGE LAYOUT ===== */
+/* ===== THEME VARIABLES ===== */
 .guess-page {
+  --case-bg-dark: #1c1917;
+  --case-bg-light: #292524;
+  --case-border: #78716c;
+  --case-border-dark: #57534e;
+  --case-cream: #fef3c7;
+  --case-gold: #fbbf24;
+  --case-text: #d6d3d1;
+  --case-text-muted: #a8a29e;
+  --case-danger: #dc2626;
+  --case-high: #f87171;
+  --case-low: #60a5fa;
+  --case-correct: #4ade80;
+  
   text-align: center;
 }
 
@@ -352,8 +365,4 @@
 /* ===== WIN STREAK GLOW ===== */
 #winStreak {
   transition: all 0.3s ease;
-}
-
-.vault-container .stat-box:nth-child(2) .stat-value {
-  color: #fbbf24;
 }
