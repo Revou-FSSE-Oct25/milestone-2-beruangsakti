@@ -142,3 +142,23 @@
   color: #fbbf24;
   text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
 }
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 600px) {
+  .arcade-container {
+    padding: 20px 15px;
+    margin: 0 10px;
+    border-width: 2px;
+  }
+  
+  .arcade-title {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+  }
+  
+  #clickBtn {
+    width: 130px;
+    height: 130px;
+    font-size: 1.4rem;
+  }
+}

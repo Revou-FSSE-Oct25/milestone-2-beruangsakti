@@ -197,3 +197,42 @@ main p {
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 600px) {
+  header,
+  main,
+  footer {
+    padding: var(--spacing-md);
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .games h2 {
+    font-size: 1.5rem;
+  }
+  
+  .game-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-panel {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .stat-box {
+    min-width: 70px;
+    padding: 10px 12px;
+  }
+  
+  .stat-value {
+    font-size: 1.4rem;
+  }
+}

@@ -366,3 +366,47 @@
 #winStreak {
   transition: all 0.3s ease;
 }
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 600px) {
+  .case-file {
+    padding: 20px 15px;
+    margin: 0 10px;
+    border-width: 2px;
+  }
+  
+  .case-title {
+    font-size: 1.4rem;
+  }
+  
+  .case-stamp {
+    padding: 4px 8px;
+    font-size: 0.6rem;
+    top: -5px;
+    right: -5px;
+  }
+  
+  .input-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  #guessInput {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .feedback-box {
+    font-size: 0.95rem;
+    padding: 12px;
+  }
+  
+  .guess-history {
+    gap: 6px;
+  }
+  
+  .guess-chip {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+}
