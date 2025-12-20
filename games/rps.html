@@ -66,31 +66,33 @@
         </div>
       </div>
 
-      <div id="resultBox" class="result-box">Ready your stance!</div>
+      <div id="resultBox" class="result-box" aria-live="polite">Ready your stance!</div>
 
-      <div class="weapon-selection">
-        <button class="weapon-btn" data-choice="rock" title="Rock">
+      <div class="weapon-selection" role="group" aria-label="Choose your weapon">
+        <button class="weapon-btn" data-choice="rock" title="Rock" aria-label="Rock. Press 1 or R.">
           <span class="weapon-emoji">🪨</span>
           <span class="weapon-name">Rock</span>
         </button>
-        <button class="weapon-btn" data-choice="paper" title="Paper">
+        <button class="weapon-btn" data-choice="paper" title="Paper" aria-label="Paper. Press 2 or P.">
           <span class="weapon-emoji">📜</span>
           <span class="weapon-name">Paper</span>
         </button>
-        <button class="weapon-btn" data-choice="scissors" title="Scissors">
+        <button class="weapon-btn" data-choice="scissors" title="Scissors" aria-label="Scissors. Press 3 or S.">
           <span class="weapon-emoji">✂️</span>
           <span class="weapon-name">Scissors</span>
         </button>
       </div>
 
-      <div id="matchResult" class="match-result hidden"></div>
+      <div id="matchResult" class="match-result hidden" aria-live="assertive"></div>
 
       <div class="action-buttons">
-        <button id="nextRoundBtn" class="next-round-btn hidden">Next Round</button>
-        <button id="newMatchBtn" class="new-match-btn">New Match</button>
+        <button id="nextRoundBtn" class="next-round-btn hidden" aria-label="Next round. Press Enter or Space.">Next Round</button>
+        <button id="newMatchBtn" class="new-match-btn" aria-label="Start new match. Press N.">New Match</button>
       </div>
 
-      <div class="lifetime-stats">
+      <p class="keyboard-hint">⌨️ 1/R/P/S for weapons • Enter for next • N for new match</p>
+
+      <div class="lifetime-stats" role="region" aria-label="Lifetime statistics">
         <p>Honor: <span id="totalWins">0</span>W - <span id="totalLosses">0</span>L - <span id="totalDraws">0</span>D</p>
       </div>
     </div>

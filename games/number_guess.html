@@ -29,10 +29,10 @@
         <p><strong>INTEL:</strong> You have <strong>9 interrogations</strong> to crack the case.</p>
       </div>
 
-      <div class="stats-panel case-stats">
+      <div class="stats-panel case-stats" role="region" aria-label="Game statistics">
         <div class="stat-box">
           <span class="stat-label">CLUES LEFT</span>
-          <span id="attempts" class="stat-value">9</span>
+          <span id="attempts" class="stat-value" aria-live="polite">9</span>
         </div>
         <div class="stat-box">
           <span class="stat-label">CASES WON</span>
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div id="rangeHint" class="range-hint evidence-note">Suspect range: 1 - 100</div>
+      <div id="rangeHint" class="range-hint evidence-note" aria-live="polite">Suspect range: 1 - 100</div>
 
       <div class="guess-input-group interrogation-box">
         <input
@@ -53,19 +53,22 @@
           placeholder="?"
           min="1"
           max="100"
+          aria-label="Enter your guess between 1 and 100"
         />
-        <button id="guessBtn">📝 Interrogate</button>
+        <button id="guessBtn" aria-label="Submit guess. Press Enter.">📝 Interrogate</button>
       </div>
 
-      <div id="feedback" class="feedback-box case-notes">Awaiting your first lead...</div>
+      <div id="feedback" class="feedback-box case-notes" aria-live="assertive">Awaiting your first lead...</div>
 
       <div id="historyContainer" class="history-container evidence-board">
         <p class="history-title">📋 Evidence Board:</p>
         <div id="guessHistory" class="guess-history"></div>
       </div>
 
-      <button id="restartBtn" class="restart-btn new-case-btn">📁 New Case</button>
+      <button id="restartBtn" class="restart-btn new-case-btn" aria-label="Start new case. Press R.">📁 New Case</button>
     </div>
+
+    <p class="keyboard-hint">⌨️ Enter to submit • R for new case</p>
 
     <br />
     <a href="../index.html">← Back to Headquarters</a>

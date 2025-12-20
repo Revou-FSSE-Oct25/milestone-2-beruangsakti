@@ -26,14 +26,14 @@
         <strong>10 seconds</strong>!
       </p>
 
-      <div class="stats-panel">
+      <div class="stats-panel" role="region" aria-label="Game statistics">
         <div class="stat-box">
           <span class="stat-label">TIME</span>
-          <span id="timer" class="stat-value">10</span>
+          <span id="timer" class="stat-value" aria-live="polite">10</span>
         </div>
         <div class="stat-box">
           <span class="stat-label">SCORE</span>
-          <span id="score" class="stat-value">0</span>
+          <span id="score" class="stat-value" aria-live="polite">0</span>
         </div>
         <div class="stat-box">
           <span class="stat-label">BEST</span>
@@ -41,12 +41,14 @@
         </div>
       </div>
 
-      <button id="clickBtn">CLICK!</button>
+      <button id="clickBtn" aria-label="Click to score points. Press Space or Enter.">CLICK!</button>
 
-      <p id="finalMessage"></p>
+      <p id="finalMessage" aria-live="assertive"></p>
 
-      <button id="restartBtn" class="restart-btn">🔄 Play Again</button>
+      <button id="restartBtn" class="restart-btn" aria-label="Restart game. Press R.">🔄 Play Again</button>
     </div>
+
+    <p class="keyboard-hint">⌨️ Space/Enter to click • R to restart</p>
 
     <br />
     <a href="../index.html">← Back to Home</a>

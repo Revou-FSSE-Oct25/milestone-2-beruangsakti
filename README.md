@@ -35,6 +35,31 @@ Test your speed! Click as fast as you can in 10 seconds.
 - **Unique themes** - Each game has its own visual identity
 - **Responsive design** - Works on desktop and mobile
 - **Dark mode** - Easy on the eyes
+- **Keyboard support** - Play without a mouse
+- **Accessible** - Screen reader friendly with ARIA labels
+
+## ⌨️ Keyboard Shortcuts
+
+### Clicker Game
+| Key | Action |
+|-----|--------|
+| `Space` / `Enter` | Click the button |
+| `R` | Restart game |
+
+### Number Guessing
+| Key | Action |
+|-----|--------|
+| `Enter` | Submit guess |
+| `R` | New case (when not typing) |
+
+### Rock Paper Scissors
+| Key | Action |
+|-----|--------|
+| `1` or `R` | Rock |
+| `2` or `P` | Paper |
+| `3` or `S` | Scissors |
+| `Enter` / `Space` | Next round |
+| `N` | New match |
 
 ## 🛠️ Tech Stack
 
